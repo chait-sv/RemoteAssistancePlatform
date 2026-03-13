@@ -1,25 +1,6 @@
-import { Battery, HardDrive, Gauge, AlertCircle, Send, ArrowRight, Camera, Circle } from "lucide-react";
+import { Battery, HardDrive, Gauge, AlertCircle, Send, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-
-type HealthStatus = "green" | "amber" | "red";
-
-const sensorHealth = {
-  cameras: [
-    { label: "Front", status: "green" as HealthStatus },
-    { label: "Left", status: "green" as HealthStatus },
-    { label: "Right", status: "amber" as HealthStatus },
-    { label: "Rear", status: "red" as HealthStatus },
-  ],
-  lidar: { label: "Lidar", status: "green" as HealthStatus },
-  radar: { label: "Radar", status: "amber" as HealthStatus },
-};
-
-const statusColor: Record<HealthStatus, string> = {
-  green: "text-emerald-500",
-  amber: "text-amber-400",
-  red: "text-destructive",
-};
 
 const telemetryData = [
   { label: "Vehicle ID", value: "NRU-0042", icon: null },
@@ -53,33 +34,7 @@ const TelemetryPanel = () => {
                 <span className={`font-mono font-medium ${d.color || "text-foreground"}`}>
                   {d.value}
                 </span>
-      </div>
-
-      {/* Sensor Health */}
-      <div className="panel-border">
-        <div className="panel-header">Sensor Health</div>
-        <div className="p-2.5 space-y-2">
-          <div className="text-[10px] text-muted-foreground font-medium flex items-center gap-1">
-            <Camera className="h-3 w-3" /> Cameras
-          </div>
-          <div className="pl-3 space-y-1">
-            {sensorHealth.cameras.map((cam) => (
-              <div key={cam.label} className="flex items-center justify-between text-[11px]">
-                <span className="text-muted-foreground">{cam.label}</span>
-                <Circle className={`h-2.5 w-2.5 fill-current ${statusColor[cam.status]}`} />
               </div>
-            ))}
-          </div>
-          <div className="flex items-center justify-between text-[11px] pt-1">
-            <span className="text-muted-foreground">{sensorHealth.lidar.label}</span>
-            <Circle className={`h-2.5 w-2.5 fill-current ${statusColor[sensorHealth.lidar.status]}`} />
-          </div>
-          <div className="flex items-center justify-between text-[11px]">
-            <span className="text-muted-foreground">{sensorHealth.radar.label}</span>
-            <Circle className={`h-2.5 w-2.5 fill-current ${statusColor[sensorHealth.radar.status]}`} />
-          </div>
-        </div>
-      </div>
             </div>
           ))}
         </div>
