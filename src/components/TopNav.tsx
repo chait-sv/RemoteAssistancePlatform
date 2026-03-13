@@ -19,7 +19,7 @@ const TopNav = () => {
         <span className="font-sans font-bold text-sm tracking-widest uppercase text-foreground">
           FIP
         </span>
-        <span className="text-xs text-muted-foreground hidden sm:inline">
+        <span className="text-sm font-semibold text-foreground hidden sm:inline tracking-wide">
           Fleet Intelligence Platform
         </span>
       </div>
