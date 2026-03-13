@@ -66,7 +66,7 @@ const TelemetryPanel = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <div className="flex flex-col h-full gap-2">
+    <div className="flex flex-col gap-2 pb-2">
       {/* Telemetry */}
       <Collapsible defaultOpen className="panel-border">
         <CollapsibleTrigger className="panel-header w-full flex items-center justify-between cursor-pointer group">
