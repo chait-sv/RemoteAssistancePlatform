@@ -22,11 +22,21 @@ const sensorHealth: { category: string; sensors: { name: string; status: HealthS
   },
   {
     category: "Lidar",
-    sensors: [{ name: "Lidar", status: "green" }],
+    sensors: [
+      { name: "Front", status: "green" },
+      { name: "Left", status: "green" },
+      { name: "Right", status: "amber" },
+      { name: "Rear", status: "green" },
+    ],
   },
   {
     category: "Radar",
-    sensors: [{ name: "Radar", status: "amber" }],
+    sensors: [
+      { name: "Front", status: "amber" },
+      { name: "Left", status: "green" },
+      { name: "Right", status: "green" },
+      { name: "Rear", status: "red" },
+    ],
   },
 ];
 
