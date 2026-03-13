@@ -186,6 +186,9 @@ const TelemetryPanel = () => {
             <button className="p-1.5 rounded-sm bg-primary/20 text-primary hover:bg-primary/30 transition-colors">
               <Send className="h-3 w-3" />
             </button>
+            <button className="p-1.5 rounded-sm bg-accent/20 text-accent hover:bg-accent/30 transition-colors" title="Push to Talk">
+              <Mic className="h-3 w-3" />
+            </button>
           </div>
         </CollapsibleContent>
       </Collapsible>
