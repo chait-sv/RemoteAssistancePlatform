@@ -52,6 +52,7 @@ const telemetryData = [
   { label: "Speed", value: "12.4 km/h", icon: Gauge, color: "text-primary" },
   { label: "Fault Code", value: "E-OBS-TIMEOUT", icon: AlertCircle, color: "text-warning" },
   { label: "Fault Type", value: "AV Platform", icon: AlertCircle, color: "text-warning" },
+  { label: "Fault Description", value: "Observation pipeline timed out after 5s", icon: AlertCircle, color: "text-warning" },
 ];
 
 const chatMessages = [
