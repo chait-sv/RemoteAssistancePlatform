@@ -6,6 +6,7 @@ import camFront from "@/assets/cam-front.jpg";
 import camRight from "@/assets/cam-right.jpg";
 
 const ContextView = () => {
+  const [autonomyEngaged, setAutonomyEngaged] = useState(true);
   return (
     <div className="flex flex-col h-full gap-2">
       {/* Live Camera Feed */}
