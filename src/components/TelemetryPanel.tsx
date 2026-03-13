@@ -158,7 +158,7 @@ const TelemetryPanel = () => {
                 {isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
               </button>
               <span className="text-[10px] text-muted-foreground font-mono">
-                {isPlaying ? "Playing..." : "Paused"} · 00:15
+                {isPlaying ? "Playing..." : "Paused"} · 00:10
               </span>
             </div>
           </div>
