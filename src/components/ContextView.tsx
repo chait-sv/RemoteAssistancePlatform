@@ -2,26 +2,6 @@ import { Camera, Map, Maximize2, MapPin } from "lucide-react";
 import camLeft from "@/assets/cam-left.jpg";
 import camFront from "@/assets/cam-front.jpg";
 import camRight from "@/assets/cam-right.jpg";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-
-const currentIcon = new L.DivIcon({
-  className: "",
-  html: `<div style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="hsl(0 84% 60%)" stroke="white" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3" fill="white"/></svg></div>`,
-  iconSize: [24, 24],
-  iconAnchor: [12, 24],
-});
-
-const waypointIcon = new L.DivIcon({
-  className: "",
-  html: `<div style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="hsl(142 71% 45%)" stroke="white" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3" fill="white"/></svg></div>`,
-  iconSize: [24, 24],
-  iconAnchor: [12, 24],
-});
-
-const CURRENT_LOCATION: [number, number] = [37.7862, -122.4074]; // 170 O'Farrell St
-const WAYPOINT_LOCATION: [number, number] = [37.7871, -122.4082]; // 285 Geary St
 
 const ContextView = () => {
   return (
@@ -113,39 +93,32 @@ const ContextView = () => {
           </div>
           <span className="text-[10px] font-mono text-muted-foreground">LAT 37.7749 | LNG -122.4194</span>
         </div>
-        <div className="flex-1 relative overflow-hidden">
-          <MapContainer
-            center={[37.7867, -122.4078]}
-            zoom={17}
-            style={{ height: "100%", width: "100%" }}
-            zoomControl={false}
-            attributionControl={false}
-          >
-            <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
-            <Marker position={CURRENT_LOCATION} icon={currentIcon}>
-              <Popup>
-                <span className="text-xs font-mono">170 O'Farrell St</span>
-              </Popup>
-            </Marker>
-            <Marker position={WAYPOINT_LOCATION} icon={waypointIcon}>
-              <Popup>
-                <span className="text-xs font-mono">285 Geary St</span>
-              </Popup>
-            </Marker>
-          </MapContainer>
-          {/* Legend overlay */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-[1000] bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-sm flex items-center gap-6">
-            <div className="flex items-center gap-1">
-              <MapPin className="h-3.5 w-3.5 text-destructive" />
-              <span className="text-[10px] text-destructive font-mono font-semibold">Current Location</span>
+        <div className="flex-1 flex items-center justify-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-primary/5" />
+          {/* Grid overlay */}
+          <div className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: `
+                linear-gradient(hsl(185 100% 45% / 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, hsl(185 100% 45% / 0.3) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px',
+            }}
+          />
+          <div className="text-center z-10">
+            <Map className="h-10 w-10 text-muted-foreground/30 mx-auto mb-2" />
+            <p className="text-xs text-muted-foreground">HD MAP — ZONE SF-DOWNTOWN-42</p>
+            <div className="flex items-center justify-center gap-6 mt-2">
+              <div className="flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5 text-destructive" />
+                <span className="text-[10px] text-destructive font-mono font-semibold">Current Location</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5 text-green-500" />
+                <span className="text-[10px] text-green-500 font-mono font-semibold">New Waypoint</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1">
-              <MapPin className="h-3.5 w-3.5 text-green-500" />
-              <span className="text-[10px] text-green-500 font-mono font-semibold">New Waypoint</span>
-            </div>
-          </div>
-          <div className="absolute top-2 right-2 z-[1000] bg-background/70 backdrop-blur-sm px-2 py-1 rounded-sm">
-            <p className="text-[10px] text-muted-foreground/60 font-mono">Layer: Semantic | Objects: 142 | Updated 1.2s ago</p>
+            <p className="text-[10px] text-muted-foreground/60 mt-1 font-mono">Layer: Semantic | Objects: 142 | Updated 1.2s ago</p>
           </div>
         </div>
       </div>
