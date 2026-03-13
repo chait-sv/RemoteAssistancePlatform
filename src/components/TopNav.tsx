@@ -56,6 +56,7 @@ const TopNav = () => {
             </SelectTrigger>
             <SelectContent className="bg-popover border-border">
               <SelectItem value="uber-fleet">Uber Fleet (Nuro/Lucid)</SelectItem>
+              <SelectItem value="dev-fleet">Dev Fleet</SelectItem>
               <SelectItem value="wayve">Wayve</SelectItem>
               <SelectItem value="zoox">Zoox</SelectItem>
               <SelectItem value="waymo">Waymo</SelectItem>
