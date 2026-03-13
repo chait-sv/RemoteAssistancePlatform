@@ -35,7 +35,7 @@ const ContextView = () => {
             <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
               {/* Route shadow */}
               <path
-                d="M 185 300 C 185 240, 190 200, 200 170 C 210 140, 230 120, 260 100 C 290 80, 330 65, 370 55"
+                d="M 190 300 C 190 260, 195 240, 210 220 C 225 200, 260 185, 295 178"
                 fill="none"
                 stroke="hsl(185 100% 45% / 0.15)"
                 strokeWidth="28"
@@ -43,7 +43,7 @@ const ContextView = () => {
               />
               {/* Route fill */}
               <path
-                d="M 185 300 C 185 240, 190 200, 200 170 C 210 140, 230 120, 260 100 C 290 80, 330 65, 370 55"
+                d="M 190 300 C 190 260, 195 240, 210 220 C 225 200, 260 185, 295 178"
                 fill="none"
                 stroke="hsl(142 71% 45% / 0.5)"
                 strokeWidth="14"
@@ -51,7 +51,7 @@ const ContextView = () => {
               />
               {/* Route center line (dashed) */}
               <path
-                d="M 185 300 C 185 240, 190 200, 200 170 C 210 140, 230 120, 260 100 C 290 80, 330 65, 370 55"
+                d="M 190 300 C 190 260, 195 240, 210 220 C 225 200, 260 185, 295 178"
                 fill="none"
                 stroke="hsl(142 71% 65% / 0.9)"
                 strokeWidth="2"
@@ -59,8 +59,8 @@ const ContextView = () => {
                 strokeLinecap="round"
               />
               {/* Waypoint marker at end */}
-              <circle cx="370" cy="55" r="6" fill="hsl(142 71% 45% / 0.8)" stroke="white" strokeWidth="1.5" />
-              <circle cx="370" cy="55" r="2.5" fill="white" />
+              <circle cx="295" cy="178" r="6" fill="hsl(142 71% 45% / 0.8)" stroke="white" strokeWidth="1.5" />
+              <circle cx="295" cy="178" r="2.5" fill="white" />
             </svg>
             <div className="absolute top-1.5 left-1.5 bg-background/70 backdrop-blur-sm px-1.5 py-0.5 rounded-sm">
               <span className="text-[9px] font-mono text-muted-foreground">CAM_FRONT</span>
