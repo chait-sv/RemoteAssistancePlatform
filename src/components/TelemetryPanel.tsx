@@ -147,42 +147,47 @@ const TelemetryPanel = () => {
       </Collapsible>
 
       {/* Rider Comms */}
-      <div className="panel-border flex-1 flex flex-col min-h-0">
-        <div className="panel-header">Rider Comms</div>
-        <div className="flex-1 overflow-auto p-2.5 space-y-2">
-          {chatMessages.map((msg, i) => (
-            <div
-              key={i}
-              className={`text-[11px] ${
-                msg.sender === "operator" ? "text-right" : ""
-              }`}
-            >
+      <Collapsible defaultOpen className="panel-border flex flex-col min-h-0">
+        <CollapsibleTrigger className="panel-header w-full flex items-center justify-between cursor-pointer group">
+          <span>Rider Comms</span>
+          <ChevronDown className="h-3 w-3 text-muted-foreground transition-transform group-data-[state=closed]:-rotate-90" />
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="overflow-auto p-2.5 space-y-2">
+            {chatMessages.map((msg, i) => (
               <div
-                className={`inline-block px-2 py-1.5 rounded-md max-w-[85%] ${
-                  msg.sender === "operator"
-                    ? "bg-primary/15 text-foreground"
-                    : "bg-secondary text-card-foreground"
+                key={i}
+                className={`text-[11px] ${
+                  msg.sender === "operator" ? "text-right" : ""
                 }`}
               >
-                {msg.text}
+                <div
+                  className={`inline-block px-2 py-1.5 rounded-md max-w-[85%] ${
+                    msg.sender === "operator"
+                      ? "bg-primary/15 text-foreground"
+                      : "bg-secondary text-card-foreground"
+                  }`}
+                >
+                  {msg.text}
+                </div>
+                <div className="text-[9px] text-muted-foreground mt-0.5 font-mono">{msg.time}</div>
               </div>
-              <div className="text-[9px] text-muted-foreground mt-0.5 font-mono">{msg.time}</div>
-            </div>
-          ))}
-        </div>
-        <div className="p-2 border-t border-border flex gap-1.5">
-          <input
-            type="text"
-            value={chatInput}
-            onChange={(e) => setChatInput(e.target.value)}
-            placeholder="Message rider..."
-            className="flex-1 bg-secondary text-xs text-foreground px-2.5 py-1.5 rounded-sm border border-border placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
-          />
-          <button className="p-1.5 rounded-sm bg-primary/20 text-primary hover:bg-primary/30 transition-colors">
-            <Send className="h-3 w-3" />
-          </button>
-        </div>
-      </div>
+            ))}
+          </div>
+          <div className="p-2 border-t border-border flex gap-1.5">
+            <input
+              type="text"
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              placeholder="Message rider..."
+              className="flex-1 bg-secondary text-xs text-foreground px-2.5 py-1.5 rounded-sm border border-border placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+            <button className="p-1.5 rounded-sm bg-primary/20 text-primary hover:bg-primary/30 transition-colors">
+              <Send className="h-3 w-3" />
+            </button>
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
 
       {/* Guided Autonomy Controls */}
       <div className="panel-border">
