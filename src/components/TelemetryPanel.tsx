@@ -153,7 +153,7 @@ const TelemetryPanel = () => {
           <ChevronDown className="h-3 w-3 text-muted-foreground transition-transform group-data-[state=closed]:-rotate-90" />
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="overflow-auto p-2.5 space-y-2">
+          <div className="overflow-y-auto max-h-[180px] p-2.5 space-y-2">
             {chatMessages.map((msg, i) => (
               <div
                 key={i}
