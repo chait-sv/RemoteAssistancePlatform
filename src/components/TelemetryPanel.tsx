@@ -1,4 +1,4 @@
-import { Battery, Gauge, AlertCircle, Send, ArrowRight } from "lucide-react";
+import { Battery, HardDrive, Gauge, AlertCircle, Send, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
