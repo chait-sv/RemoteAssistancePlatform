@@ -17,10 +17,10 @@ const TopNav = () => {
       <div className="flex items-center gap-3">
         <Shield className="h-5 w-5 text-primary" />
         <span className="font-sans font-bold text-sm tracking-widest uppercase text-foreground">
-          URP
+          FIP
         </span>
         <span className="text-xs text-muted-foreground hidden sm:inline">
-          Unified Remote Platform
+          Fleet Intelligence Platform
         </span>
       </div>
 
