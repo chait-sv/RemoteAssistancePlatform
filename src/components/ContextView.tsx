@@ -1,10 +1,12 @@
-import { Camera, Map, Maximize2, MapPin } from "lucide-react";
+import { Camera, Map, Maximize2, MapPin, ShieldCheck, ShieldOff } from "lucide-react";
+import { useState } from "react";
 import hdMapImg from "@/assets/hd-map.png";
 import camLeft from "@/assets/cam-left.jpg";
 import camFront from "@/assets/cam-front.jpg";
 import camRight from "@/assets/cam-right.jpg";
 
 const ContextView = () => {
+  const [autonomyEngaged, setAutonomyEngaged] = useState(true);
   return (
     <div className="flex flex-col h-full gap-2">
       {/* Live Camera Feed */}
@@ -15,6 +17,21 @@ const ContextView = () => {
             <span>Live Camera Feed</span>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setAutonomyEngaged(!autonomyEngaged)}
+              className={`flex items-center gap-1.5 px-2 py-0.5 rounded-sm font-mono text-[10px] font-semibold transition-colors cursor-pointer ${
+                autonomyEngaged
+                  ? "bg-primary/20 text-primary border border-primary/30"
+                  : "bg-destructive/20 text-destructive border border-destructive/30"
+              }`}
+            >
+              {autonomyEngaged ? (
+                <ShieldCheck className="h-3.5 w-3.5" />
+              ) : (
+                <ShieldOff className="h-3.5 w-3.5" />
+              )}
+              {autonomyEngaged ? "AV ENGAGED" : "AV DISENGAGED"}
+            </button>
             <span className="text-[10px] text-destructive status-pulse font-mono">● REC</span>
             <Maximize2 className="h-3 w-3 text-muted-foreground cursor-pointer hover:text-foreground transition-colors" />
           </div>
