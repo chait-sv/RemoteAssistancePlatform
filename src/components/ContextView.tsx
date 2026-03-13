@@ -103,8 +103,8 @@ const ContextView = () => {
               <span className="text-[10px] text-destructive font-mono font-semibold">Current Location</span>
             </div>
             <div className="flex items-center gap-1">
-              <MapPin className="h-3.5 w-3.5 text-green-500" />
-              <span className="text-[10px] text-green-500 font-mono font-semibold">New Waypoint</span>
+              <MapPin className="h-3.5 w-3.5 text-warning" />
+              <span className="text-[10px] text-warning font-mono font-semibold">New Waypoint</span>
             </div>
           </div>
           <div className="absolute bottom-2 right-2 bg-background/80 backdrop-blur-sm px-2 py-0.5 rounded-sm">
