@@ -5,6 +5,7 @@ import { useState } from "react";
 const telemetryData = [
   { label: "Vehicle ID", value: "NRU-0042", icon: null },
   { label: "Battery", value: "78%", icon: Battery, color: "text-accent" },
+  { label: "Disk Storage", value: "42%", icon: HardDrive, color: "text-accent" },
   { label: "Speed", value: "12.4 km/h", icon: Gauge, color: "text-primary" },
   { label: "Fault Code", value: "E-OBS-TIMEOUT", icon: AlertCircle, color: "text-warning" },
 ];
