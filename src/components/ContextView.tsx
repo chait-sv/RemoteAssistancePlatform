@@ -1,4 +1,5 @@
 import { Camera, Map, Maximize2, MapPin } from "lucide-react";
+import hdMapImg from "@/assets/hd-map.png";
 import camLeft from "@/assets/cam-left.jpg";
 import camFront from "@/assets/cam-front.jpg";
 import camRight from "@/assets/cam-right.jpg";
@@ -93,32 +94,21 @@ const ContextView = () => {
           </div>
           <span className="text-[10px] font-mono text-muted-foreground">LAT 37.7749 | LNG -122.4194</span>
         </div>
-        <div className="flex-1 flex items-center justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-primary/5" />
-          {/* Grid overlay */}
-          <div className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `
-                linear-gradient(hsl(185 100% 45% / 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, hsl(185 100% 45% / 0.3) 1px, transparent 1px)
-              `,
-              backgroundSize: '40px 40px',
-            }}
-          />
-          <div className="text-center z-10">
-            <Map className="h-10 w-10 text-muted-foreground/30 mx-auto mb-2" />
-            <p className="text-xs text-muted-foreground">HD MAP — ZONE SF-DOWNTOWN-42</p>
-            <div className="flex items-center justify-center gap-6 mt-2">
-              <div className="flex items-center gap-1">
-                <MapPin className="h-3.5 w-3.5 text-destructive" />
-                <span className="text-[10px] text-destructive font-mono font-semibold">Current Location</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <MapPin className="h-3.5 w-3.5 text-green-500" />
-                <span className="text-[10px] text-green-500 font-mono font-semibold">New Waypoint</span>
-              </div>
+        <div className="flex-1 relative overflow-hidden min-h-0">
+          <img src={hdMapImg} alt="HD Semantic Map of San Francisco" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-background/10" />
+          <div className="absolute bottom-2 left-2 flex items-center gap-4 bg-background/80 backdrop-blur-sm px-2.5 py-1 rounded-sm">
+            <div className="flex items-center gap-1">
+              <MapPin className="h-3.5 w-3.5 text-destructive" />
+              <span className="text-[10px] text-destructive font-mono font-semibold">Current Location</span>
             </div>
-            <p className="text-[10px] text-muted-foreground/60 mt-1 font-mono">Layer: Semantic | Objects: 142 | Updated 1.2s ago</p>
+            <div className="flex items-center gap-1">
+              <MapPin className="h-3.5 w-3.5 text-green-500" />
+              <span className="text-[10px] text-green-500 font-mono font-semibold">New Waypoint</span>
+            </div>
+          </div>
+          <div className="absolute bottom-2 right-2 bg-background/80 backdrop-blur-sm px-2 py-0.5 rounded-sm">
+            <p className="text-[10px] text-muted-foreground/60 font-mono">Layer: Semantic | Objects: 142 | Updated 1.2s ago</p>
           </div>
         </div>
       </div>
