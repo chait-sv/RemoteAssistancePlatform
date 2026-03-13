@@ -31,8 +31,42 @@ const ContextView = () => {
           <div className="w-1/2 relative border-r border-border">
             <img src={camFront} alt="Front camera view" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-background/10" />
+            {/* AV Planner Route Overlay */}
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Route shadow */}
+              <path
+                d="M 185 300 C 185 240, 190 200, 200 170 C 210 140, 230 120, 260 100 C 290 80, 330 65, 370 55"
+                fill="none"
+                stroke="hsl(185 100% 45% / 0.15)"
+                strokeWidth="28"
+                strokeLinecap="round"
+              />
+              {/* Route fill */}
+              <path
+                d="M 185 300 C 185 240, 190 200, 200 170 C 210 140, 230 120, 260 100 C 290 80, 330 65, 370 55"
+                fill="none"
+                stroke="hsl(142 71% 45% / 0.5)"
+                strokeWidth="14"
+                strokeLinecap="round"
+              />
+              {/* Route center line (dashed) */}
+              <path
+                d="M 185 300 C 185 240, 190 200, 200 170 C 210 140, 230 120, 260 100 C 290 80, 330 65, 370 55"
+                fill="none"
+                stroke="hsl(142 71% 65% / 0.9)"
+                strokeWidth="2"
+                strokeDasharray="8 6"
+                strokeLinecap="round"
+              />
+              {/* Waypoint marker at end */}
+              <circle cx="370" cy="55" r="6" fill="hsl(142 71% 45% / 0.8)" stroke="white" strokeWidth="1.5" />
+              <circle cx="370" cy="55" r="2.5" fill="white" />
+            </svg>
             <div className="absolute top-1.5 left-1.5 bg-background/70 backdrop-blur-sm px-1.5 py-0.5 rounded-sm">
               <span className="text-[9px] font-mono text-muted-foreground">CAM_FRONT</span>
+            </div>
+            <div className="absolute top-1.5 right-1.5 bg-green-500/20 backdrop-blur-sm px-1.5 py-0.5 rounded-sm border border-green-500/30">
+              <span className="text-[9px] font-mono text-green-400">ROUTE ACTIVE</span>
             </div>
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-background/80 backdrop-blur-sm px-2.5 py-1 rounded-sm text-center">
               <p className="text-[10px] text-warning font-semibold">Passenger spotted 50ft ahead in restricted red zone</p>
