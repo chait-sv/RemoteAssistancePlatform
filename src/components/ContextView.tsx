@@ -1,4 +1,7 @@
 import { Camera, Map, Maximize2, MapPin } from "lucide-react";
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import camLeft from "@/assets/cam-left.jpg";
 import camFront from "@/assets/cam-front.jpg";
 import camRight from "@/assets/cam-right.jpg";
@@ -91,24 +94,54 @@ const ContextView = () => {
             <Map className="h-3 w-3 text-accent" />
             <span>HD Semantic Map</span>
           </div>
-          <span className="text-[10px] font-mono text-muted-foreground">LAT 37.7749 | LNG -122.4194</span>
+          <span className="text-[10px] font-mono text-muted-foreground">LAT 37.7875 | LNG -122.4064</span>
         </div>
-        <div className="flex-1 flex items-center justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-primary/5" />
-          {/* Grid overlay */}
-          <div className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `
-                linear-gradient(hsl(185 100% 45% / 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, hsl(185 100% 45% / 0.3) 1px, transparent 1px)
-              `,
-              backgroundSize: '40px 40px',
-            }}
-          />
-          <div className="text-center z-10">
-            <Map className="h-10 w-10 text-muted-foreground/30 mx-auto mb-2" />
-            <p className="text-xs text-muted-foreground">HD MAP — ZONE SF-DOWNTOWN-42</p>
-            <div className="flex items-center justify-center gap-6 mt-2">
+        <div className="flex-1 relative overflow-hidden min-h-0">
+          <MapContainer
+            center={[37.78735, -122.40640]}
+            zoom={18}
+            style={{ height: "100%", width: "100%" }}
+            zoomControl={false}
+            attributionControl={false}
+          >
+            <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+            {/* Current Location - 222 Stockton St */}
+            <Marker
+              position={[37.78755, -122.40640]}
+              icon={L.divIcon({
+                className: "",
+                html: `<div style="display:flex;flex-direction:column;align-items:center;">
+                  <svg width="24" height="32" viewBox="0 0 24 32"><path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 20 12 20s12-11 12-20C24 5.4 18.6 0 12 0z" fill="hsl(0,84%,60%)"/><circle cx="12" cy="12" r="5" fill="white"/></svg>
+                </div>`,
+                iconSize: [24, 32],
+                iconAnchor: [12, 32],
+              })}
+            >
+              <Popup><span className="text-xs font-mono">Current Location<br/>222 Stockton St</span></Popup>
+            </Marker>
+            {/* New Waypoint - 212 Stockton St */}
+            <Marker
+              position={[37.78715, -122.40640]}
+              icon={L.divIcon({
+                className: "",
+                html: `<div style="display:flex;flex-direction:column;align-items:center;">
+                  <svg width="24" height="32" viewBox="0 0 24 32"><path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 20 12 20s12-11 12-20C24 5.4 18.6 0 12 0z" fill="hsl(142,71%,45%)"/><circle cx="12" cy="12" r="5" fill="white"/></svg>
+                </div>`,
+                iconSize: [24, 32],
+                iconAnchor: [12, 32],
+              })}
+            >
+              <Popup><span className="text-xs font-mono">New Waypoint<br/>212 Stockton St</span></Popup>
+            </Marker>
+            {/* Route line between points */}
+            <Polyline
+              positions={[[37.78755, -122.40640], [37.78715, -122.40640]]}
+              pathOptions={{ color: "hsl(142,71%,45%)", weight: 3, dashArray: "8 6", opacity: 0.8 }}
+            />
+          </MapContainer>
+          {/* Legend overlay */}
+          <div className="absolute bottom-2 left-2 z-[1000] bg-background/80 backdrop-blur-sm px-2 py-1.5 rounded-sm">
+            <div className="flex items-center gap-4">
               <div className="flex items-center gap-1">
                 <MapPin className="h-3.5 w-3.5 text-destructive" />
                 <span className="text-[10px] text-destructive font-mono font-semibold">Current Location</span>
@@ -118,7 +151,6 @@ const ContextView = () => {
                 <span className="text-[10px] text-green-500 font-mono font-semibold">New Waypoint</span>
               </div>
             </div>
-            <p className="text-[10px] text-muted-foreground/60 mt-1 font-mono">Layer: Semantic | Objects: 142 | Updated 1.2s ago</p>
           </div>
         </div>
       </div>
