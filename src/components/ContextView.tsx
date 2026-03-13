@@ -1,4 +1,4 @@
-import { Camera, Map, Maximize2 } from "lucide-react";
+import { Camera, Map, Maximize2, MapPin } from "lucide-react";
 
 const ContextView = () => {
   return (
