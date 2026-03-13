@@ -1,4 +1,4 @@
-import { Battery, HardDrive, Gauge, AlertCircle, Send, ArrowRight, ChevronDown, Play, Pause } from "lucide-react";
+import { Battery, HardDrive, Gauge, AlertCircle, Send, ArrowRight, ChevronDown, Play, Pause, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
@@ -52,12 +52,12 @@ const telemetryData = [
   { label: "Speed", value: "12.4 km/h", icon: Gauge, color: "text-primary" },
   { label: "Fault Code", value: "E-OBS-TIMEOUT", icon: AlertCircle, color: "text-warning" },
   { label: "Fault Type", value: "AV Platform", icon: AlertCircle, color: "text-warning" },
-  { label: "Fault Description", value: "Observation pipeline timed out after 5s", icon: AlertCircle, color: "text-warning" },
+  { label: "Fault Description", value: "Error: Unable to locate Uber passenger at designated pin.", icon: AlertCircle, color: "text-warning" },
 ];
 
 const chatMessages = [
   { sender: "rider", text: "Why has the car stopped?", time: "14:32" },
-  { sender: "operator", text: "We detected an obstruction. Rerouting now.", time: "14:33" },
+  { sender: "operator", text: "Nuro Support is helping your vehicle find a safe place to pull over. We see you on the curb.", time: "14:33" },
   { sender: "rider", text: "OK, how long will it take?", time: "14:33" },
 ];
 
@@ -186,6 +186,9 @@ const TelemetryPanel = () => {
             <button className="p-1.5 rounded-sm bg-primary/20 text-primary hover:bg-primary/30 transition-colors">
               <Send className="h-3 w-3" />
             </button>
+            <button className="p-1.5 rounded-sm bg-accent/20 text-accent hover:bg-accent/30 transition-colors" title="Push to Talk">
+              <Mic className="h-3 w-3" />
+            </button>
           </div>
         </CollapsibleContent>
       </Collapsible>
@@ -194,12 +197,12 @@ const TelemetryPanel = () => {
       <div className="panel-border">
         <div className="panel-header">Guided Autonomy Controls</div>
         <div className="p-2.5 space-y-2">
-          <div className="text-[10px] text-muted-foreground mb-2">
-            Suggested: Override obstruction and reroute via Mission St.
+          <div className="text-[11px] text-accent font-semibold mb-2">
+            Action: Send new Waypoint to Vehicle
           </div>
           <Button variant="command" size="lg" className="w-full gap-2">
             <ArrowRight className="h-4 w-4" />
-            Execute Reroute
+            Execute
           </Button>
           <div className="flex gap-1.5">
             <Button variant="outline" size="sm" className="flex-1 text-[10px]">

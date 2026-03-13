@@ -1,4 +1,4 @@
-import { Camera, Map, Maximize2 } from "lucide-react";
+import { Camera, Map, Maximize2, MapPin } from "lucide-react";
 
 const ContextView = () => {
   return (
@@ -20,6 +20,7 @@ const ContextView = () => {
           <div className="text-center z-10">
             <Camera className="h-10 w-10 text-muted-foreground/30 mx-auto mb-2" />
             <p className="text-xs text-muted-foreground">FEED — NRU-0042 — CAM_FRONT</p>
+            <p className="text-[10px] text-warning mt-1.5 font-semibold">Camera Feed: Passenger spotted 50ft ahead in restricted red zone</p>
             <p className="text-[10px] text-muted-foreground/60 mt-1 font-mono">1920×1080 @ 30fps | 48ms latency</p>
           </div>
         </div>
@@ -49,6 +50,16 @@ const ContextView = () => {
           <div className="text-center z-10">
             <Map className="h-10 w-10 text-muted-foreground/30 mx-auto mb-2" />
             <p className="text-xs text-muted-foreground">HD MAP — ZONE SF-DOWNTOWN-42</p>
+            <div className="flex items-center justify-center gap-6 mt-2">
+              <div className="flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5 text-destructive" />
+                <span className="text-[10px] text-destructive font-mono font-semibold">Current Location</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5 text-green-500" />
+                <span className="text-[10px] text-green-500 font-mono font-semibold">New Waypoint</span>
+              </div>
+            </div>
             <p className="text-[10px] text-muted-foreground/60 mt-1 font-mono">Layer: Semantic | Objects: 142 | Updated 1.2s ago</p>
           </div>
         </div>
