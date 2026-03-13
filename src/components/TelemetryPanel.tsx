@@ -197,12 +197,12 @@ const TelemetryPanel = () => {
       <div className="panel-border">
         <div className="panel-header">Guided Autonomy Controls</div>
         <div className="p-2.5 space-y-2">
-          <div className="text-[10px] text-muted-foreground mb-2">
-            Suggested: Override obstruction and reroute via Mission St.
+          <div className="text-[11px] text-accent font-semibold mb-2">
+            Action: Send new Waypoint to Vehicle
           </div>
           <Button variant="command" size="lg" className="w-full gap-2">
             <ArrowRight className="h-4 w-4" />
-            Execute Reroute
+            Execute
           </Button>
           <div className="flex gap-1.5">
             <Button variant="outline" size="sm" className="flex-1 text-[10px]">

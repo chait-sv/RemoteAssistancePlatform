@@ -5,7 +5,7 @@ const tickets = [
   {
     id: "INT-4821",
     priority: "critical",
-    label: "Obstruction Override",
+    label: "P1 - Pickup Location Mismatch",
     vehicle: "NRU-0042",
     time: "00:42",
     icon: AlertTriangle,
