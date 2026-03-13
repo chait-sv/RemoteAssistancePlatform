@@ -15,7 +15,7 @@ const Index = () => {
           <ContextView />
         </div>
         {/* Telemetry & Actions */}
-        <div className="w-[25%] min-w-0">
+        <div className="w-[25%] min-w-0 overflow-y-auto">
           <TelemetryPanel />
         </div>
       </div>
