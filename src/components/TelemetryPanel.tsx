@@ -1,4 +1,4 @@
-import { Battery, HardDrive, Gauge, AlertCircle, Send, ArrowRight, ChevronDown, Play, Pause } from "lucide-react";
+import { Battery, HardDrive, Gauge, AlertCircle, Send, ArrowRight, ChevronDown, Play, Pause, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
