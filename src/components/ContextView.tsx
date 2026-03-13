@@ -1,4 +1,7 @@
 import { Camera, Map, Maximize2, MapPin } from "lucide-react";
+import camLeft from "@/assets/cam-left.jpg";
+import camFront from "@/assets/cam-front.jpg";
+import camRight from "@/assets/cam-right.jpg";
 
 const ContextView = () => {
   return (
@@ -15,13 +18,34 @@ const ContextView = () => {
             <Maximize2 className="h-3 w-3 text-muted-foreground cursor-pointer hover:text-foreground transition-colors" />
           </div>
         </div>
-        <div className="flex-1 flex items-center justify-center scanline relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
-          <div className="text-center z-10">
-            <Camera className="h-10 w-10 text-muted-foreground/30 mx-auto mb-2" />
-            <p className="text-xs text-muted-foreground">FEED — NRU-0042 — CAM_FRONT</p>
-            <p className="text-[10px] text-warning mt-1.5 font-semibold">Camera Feed: Passenger spotted 50ft ahead in restricted red zone</p>
-            <p className="text-[10px] text-muted-foreground/60 mt-1 font-mono">1920×1080 @ 30fps | 48ms latency</p>
+        <div className="flex-1 flex min-h-0 relative overflow-hidden">
+          {/* Left Camera - 25% */}
+          <div className="w-1/4 relative border-r border-border">
+            <img src={camLeft} alt="Left camera view" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-background/20" />
+            <div className="absolute top-1.5 left-1.5 bg-background/70 backdrop-blur-sm px-1.5 py-0.5 rounded-sm">
+              <span className="text-[9px] font-mono text-muted-foreground">CAM_LEFT</span>
+            </div>
+          </div>
+          {/* Center Camera - 50% */}
+          <div className="w-1/2 relative border-r border-border">
+            <img src={camFront} alt="Front camera view" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-background/10" />
+            <div className="absolute top-1.5 left-1.5 bg-background/70 backdrop-blur-sm px-1.5 py-0.5 rounded-sm">
+              <span className="text-[9px] font-mono text-muted-foreground">CAM_FRONT</span>
+            </div>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-background/80 backdrop-blur-sm px-2.5 py-1 rounded-sm text-center">
+              <p className="text-[10px] text-warning font-semibold">Passenger spotted 50ft ahead in restricted red zone</p>
+              <p className="text-[9px] text-muted-foreground/60 font-mono mt-0.5">1920×1080 @ 30fps | 48ms latency</p>
+            </div>
+          </div>
+          {/* Right Camera - 25% */}
+          <div className="w-1/4 relative">
+            <img src={camRight} alt="Right camera view" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-background/20" />
+            <div className="absolute top-1.5 left-1.5 bg-background/70 backdrop-blur-sm px-1.5 py-0.5 rounded-sm">
+              <span className="text-[9px] font-mono text-muted-foreground">CAM_RIGHT</span>
+            </div>
           </div>
         </div>
       </div>
