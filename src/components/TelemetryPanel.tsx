@@ -131,11 +131,11 @@ const TelemetryPanel = () => {
         <CollapsibleContent>
           <div className="p-2.5 space-y-2">
             {telemetryData.map((d) => (
-              <div key={d.label} className="flex items-center justify-between text-[11px]">
-                <span className="text-muted-foreground">{d.label}</span>
-                <div className="flex items-center gap-1.5 text-right">
+              <div key={d.label} className="flex items-start justify-between text-[11px]">
+                <span className="text-muted-foreground shrink-0 mr-2">{d.label}</span>
+                <div className="flex items-center gap-1.5 justify-end">
                   {d.icon && <d.icon className={`h-3 w-3 ${d.color} shrink-0`} />}
-                  <span className={`font-mono font-medium ${d.color || "text-foreground"}`}>
+                  <span className={`font-mono font-medium text-right ${d.color || "text-foreground"}`}>
                     {d.value}
                   </span>
                 </div>
