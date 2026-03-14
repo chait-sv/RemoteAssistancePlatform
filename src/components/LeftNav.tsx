@@ -12,9 +12,15 @@ const navItems = [
   { icon: BarChart3, label: "Reporting" },
 ];
 
-const LeftNav = () => {
+interface LeftNavProps {
+  activeNav: string;
+  setActiveNav: (nav: string) => void;
+}
+
+const LeftNav = ({ activeNav, setActiveNav }: LeftNavProps) => {
   const [expanded, setExpanded] = useState(true);
-  const [active, setActive] = useState("My Tasks");
+  const active = activeNav;
+  const setActive = setActiveNav;
 
   return (
     <div className="flex h-full min-w-0">
