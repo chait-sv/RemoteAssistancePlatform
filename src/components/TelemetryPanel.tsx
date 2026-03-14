@@ -46,13 +46,12 @@ const StatusDot = ({ status }: { status: HealthStatus }) => (
 );
 
 const telemetryData = [
-  { label: "Vehicle ID", value: "NRU-0042", icon: null },
-  { label: "Battery", value: "78%", icon: Battery, color: "text-accent" },
-  { label: "Disk Storage", value: "42%", icon: HardDrive, color: "text-accent" },
-  { label: "Speed", value: "12.4 km/h", icon: Gauge, color: "text-primary" },
-  { label: "Fault Code", value: "E-OBS-TIMEOUT", icon: AlertCircle, color: "text-warning" },
-  { label: "Fault Type", value: "AV Platform", icon: AlertCircle, color: "text-warning" },
-  { label: "Fault Description", value: "Call for Help: Unable to locate Uber Rider at pickup pin.", icon: AlertCircle, color: "text-warning" },
+  { label: "Vehicle ID", value: "NL-0012", icon: null },
+  { label: "Battery", value: "87%", icon: Battery, color: "text-accent" },
+  { label: "Speed", value: "0 mph", icon: Gauge, color: "text-primary" },
+  { label: "Fault Code", value: "E-PICKUP-TIMEOUT", icon: AlertCircle, color: "text-warning" },
+  { label: "Fault Type", value: "Pickup Mismatch", icon: AlertCircle, color: "text-warning" },
+  { label: "Fault Description", value: "Rider in restricted zone", icon: AlertCircle, color: "text-warning" },
 ];
 
 const chatMessages = [
