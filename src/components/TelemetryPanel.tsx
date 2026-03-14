@@ -53,7 +53,7 @@ const scenarioTelemetry = {
     { label: "Disk Storage", value: "42%", icon: HardDrive, color: "text-accent" },
     { label: "Speed", value: "0 mph", icon: Gauge, color: "text-primary" },
     { label: "Fault Code", value: "E-PICKUP-TIMEOUT", icon: AlertCircle, color: "text-warning" },
-    { label: "Fault Type", value: "Pickup Mismatch", icon: AlertCircle, color: "text-warning" },
+    { label: "Fault Type", value: "Fleet CX", icon: AlertCircle, color: "text-warning" },
     { label: "Fault Description", value: "Rider in restricted zone", icon: AlertCircle, color: "text-warning" },
   ],
   "INT-4822": [
