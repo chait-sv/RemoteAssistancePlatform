@@ -98,8 +98,8 @@ const scenarioAutonomy = {
     specialButton: null,
   },
   "INT-4822": {
-    action: null,
-    actionColor: null,
+    action: "Action: Relax constraint: Approve opposing lane usage when it is safe to do so.",
+    actionColor: "text-accent",
     warning: "Hard Constraint Active: Do Not Cross Double-Yellow Line",
     specialButton: "Relax Constraint: Approve Opposing Lane Usage",
   },
