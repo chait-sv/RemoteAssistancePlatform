@@ -133,8 +133,8 @@ const TelemetryPanel = () => {
             {telemetryData.map((d) => (
               <div key={d.label} className="flex items-start justify-between text-[11px]">
                 <span className="text-muted-foreground shrink-0 mr-2">{d.label}</span>
-                <div className="flex items-center gap-1.5 justify-end">
-                  {d.icon && <d.icon className={`h-3 w-3 ${d.color} shrink-0`} />}
+                <div className="flex items-start gap-1.5 justify-end">
+                  {d.icon && <d.icon className={`h-3 w-3 ${d.color} shrink-0 mt-0.5`} />}
                   <span className={`font-mono font-medium text-right ${d.color || "text-foreground"}`}>
                     {d.value}
                   </span>
