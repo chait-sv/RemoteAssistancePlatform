@@ -1,7 +1,7 @@
-import { AlertTriangle, Zap, Navigation } from "lucide-react";
-import { useState } from "react";
+import { AlertTriangle, Zap, Construction } from "lucide-react";
+import { useScenario, ScenarioId } from "@/contexts/ScenarioContext";
 
-const tickets = [
+const tickets: { id: ScenarioId; priority: string; label: string; vehicle: string; time: string; icon: React.ComponentType<{ className?: string }> }[] = [
   {
     id: "INT-4821",
     priority: "critical",
@@ -13,10 +13,10 @@ const tickets = [
   {
     id: "INT-4822",
     priority: "high",
-    label: "Route Deviation",
-    vehicle: "LCD-0117",
+    label: "P2 - Unmapped Construction",
+    vehicle: "NL-0025",
     time: "01:15",
-    icon: Navigation,
+    icon: Construction,
   },
   {
     id: "INT-4823",
@@ -35,7 +35,7 @@ const priorityStyles: Record<string, string> = {
 };
 
 const TaskQueue = () => {
-  const [selected, setSelected] = useState("INT-4821");
+  const { activeTicket, setActiveTicket } = useScenario();
 
   return (
     <div className="flex flex-col h-full panel-border">
@@ -46,11 +46,11 @@ const TaskQueue = () => {
       <div className="flex-1 overflow-auto p-1.5 space-y-1.5">
         {tickets.map((t) => {
           const Icon = t.icon;
-          const isActive = selected === t.id;
+          const isActive = activeTicket === t.id;
           return (
             <button
               key={t.id}
-              onClick={() => setSelected(t.id)}
+              onClick={() => setActiveTicket(t.id)}
               className={`w-full text-left p-2.5 rounded-sm border-l-2 transition-all ${
                 priorityStyles[t.priority]
               } ${
