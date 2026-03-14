@@ -101,7 +101,7 @@ const scenarioAutonomy = {
     action: "Action: Relax constraint: Approve opposing lane usage when it is safe to do so.",
     actionColor: "text-accent",
     warning: "Hard Constraint Active: Do Not Cross Double-Yellow Line",
-    specialButton: "Relax Constraint: Approve Opposing Lane Usage",
+    specialButton: null,
   },
   "INT-4823": {
     action: "Action: Approve recalibration sequence.",
