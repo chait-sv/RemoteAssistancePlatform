@@ -6,105 +6,8 @@ import { Input } from "@/components/ui/input";
 import { ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
+import { allTasks, getBand, wrapInBand, colorBands, type Task } from "@/data/taskData";
 
-// --- seed helpers ---
-const faultTypes = ["Fleet CX", "AV Platform", "Vehicle Platform", "Hardware"];
-const statuses = ["Not Started", "In progress", "Rescue"];
-const operators = [
-  "J. Martinez", "A. Chen", "R. Patel", "K. Okonkwo", "L. Johansson",
-  "M. Tanaka", "S. Williams", "D. Kim", "P. Novak", "T. Adeyemi",
-  "C. Rivera", "B. Schmidt", "N. Gupta", "F. Larsen", "H. Yamamoto",
-];
-const faultCodes: Record<string, string[]> = {
-  "Fleet CX": ["CX-001", "CX-002", "CX-003", "CX-004", "CX-005", "CX-006", "CX-007", "CX-008"],
-  "AV Platform": ["AV-101", "AV-102", "AV-103", "AV-104"],
-  "Vehicle Platform": ["VP-201", "VP-202", "VP-203"],
-  Hardware: ["HW-301", "HW-302", "HW-303", "HW-304"],
-};
-const descriptions: Record<string, string[]> = {
-  "Fleet CX": [
-    "Pickup location mismatch", "Passenger no-show timeout", "Route deviation detected",
-    "Rider app sync failure", "ETA calculation error", "Door unlock failure at stop",
-    "Payment processing delay", "Ride cancellation conflict",
-  ],
-  "AV Platform": [
-    "Perception model degradation", "Planner timeout exceeded", "Localization drift detected",
-    "Prediction module error",
-  ],
-  "Vehicle Platform": [
-    "Brake system warning", "Steering actuator fault", "Powertrain thermal alert",
-  ],
-  Hardware: [
-    "LiDAR sensor obstruction", "Camera feed dropout", "GNSS signal loss", "Radar calibration drift",
-  ],
-};
-
-function seededRandom(seed: number) {
-  let s = seed;
-  return () => {
-    s = (s * 16807 + 0) % 2147483647;
-    return s / 2147483647;
-  };
-}
-
-function generateTasks() {
-  const rand = seededRandom(42);
-  const pick = <T,>(arr: T[]) => arr[Math.floor(rand() * arr.length)];
-
-  // distribute fault types: 60 Fleet CX, 20 AV, 10 VP, 10 HW
-  const typePool: string[] = [
-    ...Array(60).fill("Fleet CX"),
-    ...Array(20).fill("AV Platform"),
-    ...Array(10).fill("Vehicle Platform"),
-    ...Array(10).fill("Hardware"),
-  ];
-  // shuffle
-  for (let i = typePool.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [typePool[i], typePool[j]] = [typePool[j], typePool[i]];
-  }
-
-  // distribute status: 75 in progress, 20 not started, 5 rescue
-  const statusPool: string[] = [
-    ...Array(75).fill("In progress"),
-    ...Array(20).fill("Not Started"),
-    ...Array(5).fill("Rescue"),
-  ];
-  for (let i = statusPool.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [statusPool[i], statusPool[j]] = [statusPool[j], statusPool[i]];
-  }
-
-  const priorities = ["P1", "P2", "P3"];
-  const now = Date.now();
-
-  return Array.from({ length: 100 }, (_, i) => {
-    const faultType = typePool[i];
-    const createdOffset = Math.floor(rand() * 86400) * 1000; // within last 24h
-    const created = new Date(now - createdOffset);
-    const elapsedRoll = rand();
-    // 60% green (0-39), 20% amber (40-59), 20% red (61-300)
-    const elapsed = elapsedRoll < 0.6
-      ? Math.floor(rand() * 40)
-      : elapsedRoll < 0.8
-        ? 40 + Math.floor(rand() * 20)
-        : 61 + Math.floor(rand() * 240);
-    return {
-      id: `INT-${5000 + i}`,
-      description: pick(descriptions[faultType]),
-      priority: pick(priorities),
-      vehicleId: `NL-${String(Math.floor(rand() * 200)).padStart(4, "0")}`,
-      faultCode: pick(faultCodes[faultType]),
-      faultType,
-      created,
-      elapsed,
-      operator: pick(operators),
-      status: statusPool[i],
-    };
-  });
-}
-
-type Task = ReturnType<typeof generateTasks>[number];
 type SortDir = "asc" | "desc" | null;
 
 const columnDefs: { key: keyof Task; label: string }[] = [
@@ -136,34 +39,12 @@ const priorityColors: Record<string, string> = {
   P4: "bg-muted text-muted-foreground border-border",
 };
 
-const allTasks = generateTasks();
-
-// Color band ranges for wrapping
-const colorBands = {
-  green: { min: 0, max: 39 },
-  amber: { min: 40, max: 59 },
-  red: { min: 61, max: 300 },
-};
-
-function getBand(elapsed: number) {
-  if (elapsed > 60) return "red";
-  if (elapsed >= 40) return "amber";
-  return "green";
-}
-
-function wrapInBand(value: number, band: keyof typeof colorBands) {
-  const { min, max } = colorBands[band];
-  const range = max - min + 1;
-  return min + ((value - min) % range + range) % range;
-}
-
 const OpenTasksTable = () => {
   const [filter, setFilter] = useState("");
   const [sortKey, setSortKey] = useState<keyof Task | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>(null);
   const [tick, setTick] = useState(0);
 
-  // Tick every second
   useEffect(() => {
     const id = setInterval(() => setTick((t) => t + 1), 1000);
     return () => clearInterval(id);

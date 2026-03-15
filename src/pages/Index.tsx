@@ -4,6 +4,7 @@ import LeftNav from "@/components/LeftNav";
 import ContextView from "@/components/ContextView";
 import TelemetryPanel from "@/components/TelemetryPanel";
 import OpenTasksTable from "@/components/OpenTasksTable";
+import LiveDashboardMap from "@/components/LiveDashboardMap";
 import { ScenarioProvider } from "@/contexts/ScenarioContext";
 
 const Index = () => {
@@ -21,11 +22,13 @@ const Index = () => {
             ) : activeNav === "Open Tasks" ? (
               <OpenTasksTable />
             ) : (
-              <div className="h-full panel-border">
-                <div className="panel-header">
-                  {activeNav === "Home" ? "Live Dashboard" : activeNav}
+              activeNav === "Home" ? (
+                <LiveDashboardMap />
+              ) : (
+                <div className="h-full panel-border">
+                  <div className="panel-header">{activeNav}</div>
                 </div>
-              </div>
+              )
             )}
           </div>
           {activeNav === "My Tasks" && (
