@@ -35,10 +35,16 @@ const Login = () => {
           </div>
         )}
 
-        <div className="space-y-1 text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground font-mono">
-            Fleet Intelligence
-          </h1>
+        <div className="space-y-3 text-center">
+          <ShieldCheck className="h-10 w-10 text-primary mx-auto" />
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground font-mono leading-tight">
+              Fleet Intelligence
+            </h1>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground font-mono leading-tight">
+              Platform
+            </h1>
+          </div>
           <p className="text-sm text-muted-foreground">Sign in to continue</p>
         </div>
 
