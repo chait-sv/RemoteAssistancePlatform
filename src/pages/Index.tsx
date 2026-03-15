@@ -4,6 +4,7 @@ import LeftNav from "@/components/LeftNav";
 import ContextView from "@/components/ContextView";
 import TelemetryPanel from "@/components/TelemetryPanel";
 import OpenTasksTable from "@/components/OpenTasksTable";
+import LiveDashboardMap from "@/components/LiveDashboardMap";
 import { ScenarioProvider } from "@/contexts/ScenarioContext";
 
 const Index = () => {
