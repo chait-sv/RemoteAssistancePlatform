@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
@@ -138,10 +138,36 @@ const priorityColors: Record<string, string> = {
 
 const allTasks = generateTasks();
 
+// Color band ranges for wrapping
+const colorBands = {
+  green: { min: 0, max: 39 },
+  amber: { min: 40, max: 59 },
+  red: { min: 61, max: 300 },
+};
+
+function getBand(elapsed: number) {
+  if (elapsed > 60) return "red";
+  if (elapsed >= 40) return "amber";
+  return "green";
+}
+
+function wrapInBand(value: number, band: keyof typeof colorBands) {
+  const { min, max } = colorBands[band];
+  const range = max - min + 1;
+  return min + ((value - min) % range + range) % range;
+}
+
 const OpenTasksTable = () => {
   const [filter, setFilter] = useState("");
   const [sortKey, setSortKey] = useState<keyof Task | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>(null);
+  const [tick, setTick] = useState(0);
+
+  // Tick every second
+  useEffect(() => {
+    const id = setInterval(() => setTick((t) => t + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
 
   const handleSort = (key: keyof Task) => {
     if (sortKey === key) {
@@ -231,7 +257,7 @@ const OpenTasksTable = () => {
                 <TableCell className="px-3 py-1.5 whitespace-nowrap">
                   {task.created.toLocaleString("en-US", { month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })}
                 </TableCell>
-                <TableCell className={`px-3 py-1.5 font-mono text-right font-semibold ${task.elapsed > 60 ? "text-destructive" : task.elapsed >= 40 ? "text-warning" : "text-green-500"}`}>{task.elapsed}</TableCell>
+                <TableCell className={`px-3 py-1.5 font-mono text-right font-semibold ${(() => { const band = getBand(task.elapsed); const live = wrapInBand(task.elapsed + tick, band); return live > 60 ? "text-destructive" : live >= 40 ? "text-warning" : "text-green-500"; })()}`}>{wrapInBand(task.elapsed + tick, getBand(task.elapsed))}</TableCell>
                 <TableCell className="px-3 py-1.5">{task.operator}</TableCell>
                 <TableCell className="px-3 py-1.5">
                   <Badge variant="outline" className={`text-[11px] px-1.5 py-0 ${statusColors[task.status]}`}>
