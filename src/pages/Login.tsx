@@ -15,10 +15,11 @@ const Login = () => {
   const location = useLocation();
   const logoutMessage = (location.state as { message?: string })?.message;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    if (login(username, password)) {
+    const success = await login(username, password);
+    if (success) {
       navigate("/");
     } else {
       setError("Invalid username or password.");
