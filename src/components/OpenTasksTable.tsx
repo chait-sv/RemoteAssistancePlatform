@@ -225,7 +225,7 @@ const OpenTasksTable = () => {
                 <TableCell className="px-3 py-1.5 whitespace-nowrap">
                   {task.created.toLocaleString("en-US", { month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })}
                 </TableCell>
-                <TableCell className="px-3 py-1.5 font-mono text-right">{task.elapsed.toLocaleString()}</TableCell>
+                <TableCell className={`px-3 py-1.5 font-mono text-right font-semibold ${task.elapsed > 60 ? "text-destructive" : task.elapsed >= 40 ? "text-warning" : "text-green-500"}`}>{task.elapsed}</TableCell>
                 <TableCell className="px-3 py-1.5">{task.operator}</TableCell>
                 <TableCell className="px-3 py-1.5">
                   <Badge variant="outline" className={`text-[11px] px-1.5 py-0 ${statusColors[task.status]}`}>
