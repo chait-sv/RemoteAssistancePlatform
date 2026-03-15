@@ -215,7 +215,7 @@ const OpenTasksTable = () => {
                 <TableCell className="px-3 py-1.5 font-semibold text-foreground">{task.id}</TableCell>
                 <TableCell className="px-3 py-1.5 max-w-[200px] truncate">{task.description}</TableCell>
                 <TableCell className="px-3 py-1.5">
-                  <Badge variant="outline" className={`text-[10px] px-1.5 py-0 ${priorityColors[task.priority]}`}>
+                  <Badge variant="outline" className={`text-[11px] px-1.5 py-0 ${priorityColors[task.priority]}`}>
                     {task.priority}
                   </Badge>
                 </TableCell>
