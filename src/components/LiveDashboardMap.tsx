@@ -91,11 +91,19 @@ function selectVehicles(tasks: Task[]): { task: Task; band: "green" | "amber" | 
   const aCount = Math.floor(amber.length * 0.5);
   const rCount = Math.floor(red.length * 0.5);
 
-  return [
-    ...pickN(green, gCount).map((t) => ({ task: t, band: "green" as const })),
-    ...pickN(amber, aCount).map((t) => ({ task: t, band: "amber" as const })),
-    ...pickN(red, rCount).map((t) => ({ task: t, band: "red" as const })),
-  ];
+  const gArr = pickN(green, gCount).map((t) => ({ task: t, band: "green" as const }));
+  const aArr = pickN(amber, aCount).map((t) => ({ task: t, band: "amber" as const }));
+  const rArr = pickN(red, rCount).map((t) => ({ task: t, band: "red" as const }));
+
+  // Interleave bands so colors are evenly distributed across map positions
+  const result: { task: Task; band: "green" | "amber" | "red" }[] = [];
+  const maxLen = Math.max(gArr.length, aArr.length, rArr.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (i < gArr.length) result.push(gArr[i]);
+    if (i < aArr.length) result.push(aArr[i]);
+    if (i < rArr.length) result.push(rArr[i]);
+  }
+  return result;
 }
 
 const LiveDashboardMap = () => {
