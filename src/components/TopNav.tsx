@@ -1,4 +1,4 @@
-import { Radio, Shield, MapPin } from "lucide-react";
+import { Radio, ShieldCheck, MapPin } from "lucide-react";
 import {
   Select,
   SelectContent,
