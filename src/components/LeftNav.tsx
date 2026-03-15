@@ -61,7 +61,7 @@ const LeftNav = ({ activeNav, setActiveNav }: LeftNavProps) => {
       </div>
 
       {/* Expandable task queue panel */}
-      {expanded && (
+      {expanded && active === "My Tasks" && (
         <div className="w-[220px] min-w-0 h-full">
           <TaskQueue />
         </div>

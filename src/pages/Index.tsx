@@ -30,18 +30,6 @@ const Index = () => {
               <TelemetryPanel />
             </div>
           )}
-          {(activeNav === "Home" || activeNav === "Open Tasks" || activeNav === "Reporting") && (
-            <div className="w-[25%] min-w-0 overflow-y-auto">
-              <div className="panel-border h-full">
-                <div className="panel-header">
-                  {activeNav === "Home" ? "Live Dashboard" : activeNav}
-                </div>
-                <div className="p-4 text-xs text-muted-foreground">
-                  {/* Placeholder */}
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </ScenarioProvider>
