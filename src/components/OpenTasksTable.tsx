@@ -93,7 +93,7 @@ function generateTasks() {
       id: `INT-${5000 + i}`,
       description: pick(descriptions[faultType]),
       priority: pick(priorities),
-      vehicleId: `NRU-${String(Math.floor(rand() * 200)).padStart(4, "0")}`,
+      vehicleId: `NL-${String(Math.floor(rand() * 200)).padStart(4, "0")}`,
       faultCode: pick(faultCodes[faultType]),
       faultType,
       created,
