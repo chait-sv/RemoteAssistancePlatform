@@ -36,7 +36,7 @@ const TopNav = () => {
             <SelectTrigger className="h-7 w-[140px] border-border bg-card text-xs text-foreground">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-popover border-border">
+            <SelectContent className="z-[2000] bg-popover border-border">
               <SelectItem value="san-francisco">San Francisco</SelectItem>
               <SelectItem value="los-angeles">Los Angeles</SelectItem>
               <SelectItem value="phoenix">Phoenix</SelectItem>
@@ -54,7 +54,7 @@ const TopNav = () => {
             <SelectTrigger className="h-7 w-[200px] border-border bg-card text-xs text-foreground">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-popover border-border">
+            <SelectContent className="z-[2000] bg-popover border-border">
               <SelectItem value="uber-fleet">Uber Fleet (Nuro/Lucid)</SelectItem>
               <SelectItem value="dev-fleet">Dev Fleet</SelectItem>
               <SelectItem value="wayve">Wayve</SelectItem>
