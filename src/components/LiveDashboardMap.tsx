@@ -2,6 +2,7 @@ import { useEffect, useRef, useMemo } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { allTasks, getBand, type Task } from "@/data/taskData";
+import vehicleImg from "@/assets/vehicle-marker.png";
 
 // San Francisco street coordinates for seeding vehicles – real streets, no overlaps
 const sfStreetPositions: [number, number][] = [
