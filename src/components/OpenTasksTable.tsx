@@ -138,10 +138,36 @@ const priorityColors: Record<string, string> = {
 
 const allTasks = generateTasks();
 
+// Color band ranges for wrapping
+const colorBands = {
+  green: { min: 0, max: 39 },
+  amber: { min: 40, max: 59 },
+  red: { min: 61, max: 300 },
+};
+
+function getBand(elapsed: number) {
+  if (elapsed > 60) return "red";
+  if (elapsed >= 40) return "amber";
+  return "green";
+}
+
+function wrapInBand(value: number, band: keyof typeof colorBands) {
+  const { min, max } = colorBands[band];
+  const range = max - min + 1;
+  return min + ((value - min) % range + range) % range;
+}
+
 const OpenTasksTable = () => {
   const [filter, setFilter] = useState("");
   const [sortKey, setSortKey] = useState<keyof Task | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>(null);
+  const [tick, setTick] = useState(0);
+
+  // Tick every second
+  useState(() => {
+    const id = setInterval(() => setTick((t) => t + 1), 1000);
+    return () => clearInterval(id);
+  });
 
   const handleSort = (key: keyof Task) => {
     if (sortKey === key) {
