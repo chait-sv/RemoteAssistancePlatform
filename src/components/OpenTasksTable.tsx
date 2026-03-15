@@ -211,7 +211,7 @@ const OpenTasksTable = () => {
           </TableHeader>
           <TableBody>
             {sorted.map((task) => (
-              <TableRow key={task.id} className="text-[11px]">
+              <TableRow key={task.id} className="text-xs">
                 <TableCell className="px-3 py-1.5 font-semibold text-foreground">{task.id}</TableCell>
                 <TableCell className="px-3 py-1.5 max-w-[200px] truncate">{task.description}</TableCell>
                 <TableCell className="px-3 py-1.5">
