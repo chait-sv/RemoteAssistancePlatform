@@ -164,10 +164,10 @@ const OpenTasksTable = () => {
   const [tick, setTick] = useState(0);
 
   // Tick every second
-  useState(() => {
+  useEffect(() => {
     const id = setInterval(() => setTick((t) => t + 1), 1000);
     return () => clearInterval(id);
-  });
+  }, []);
 
   const handleSort = (key: keyof Task) => {
     if (sortKey === key) {
