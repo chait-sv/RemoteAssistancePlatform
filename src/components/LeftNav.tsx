@@ -1,7 +1,9 @@
-import { Home, User, FolderOpen, Loader, BarChart3, PanelLeftClose, PanelLeft } from "lucide-react";
+import { Home, User, FolderOpen, BarChart3, PanelLeftClose, PanelLeft, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useAuth } from "@/contexts/AuthContext";
 import TaskQueue from "@/components/TaskQueue";
 
 const navItems = [
@@ -18,12 +20,18 @@ interface LeftNavProps {
 
 const LeftNav = ({ activeNav, setActiveNav }: LeftNavProps) => {
   const [expanded, setExpanded] = useState(true);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
   const active = activeNav;
   const setActive = setActiveNav;
 
+  const handleLogout = () => {
+    logout();
+    navigate("/login", { state: { message: "Logout successful." } });
+  };
+
   return (
     <div className="flex h-full min-w-0">
-      {/* Icon rail — always visible */}
       <div className="flex flex-col h-full w-12 shrink-0 panel-border">
         <div className="panel-header flex items-center justify-center">
           <button onClick={() => setExpanded(!expanded)} className="text-muted-foreground hover:text-foreground transition-colors">
@@ -58,9 +66,27 @@ const LeftNav = ({ activeNav, setActiveNav }: LeftNavProps) => {
             );
           })}
         </div>
+
+        {/* Logout button at bottom */}
+        <div className="flex flex-col items-center py-2 border-t border-border">
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger asChild>
+              <button
+                onClick={handleLogout}
+                className="w-9 h-9 rounded-sm flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+              >
+                <LogOut className="h-4 w-4" />
+              </button>
+            </TooltipTrigger>
+            {!expanded && (
+              <TooltipContent side="right" className="text-xs">
+                Logout
+              </TooltipContent>
+            )}
+          </Tooltip>
+        </div>
       </div>
 
-      {/* Expandable task queue panel */}
       {expanded && active === "My Tasks" && (
         <div className="w-[220px] min-w-0 h-full">
           <TaskQueue />

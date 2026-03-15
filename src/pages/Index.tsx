@@ -6,7 +6,7 @@ import TelemetryPanel from "@/components/TelemetryPanel";
 import { ScenarioProvider } from "@/contexts/ScenarioContext";
 
 const Index = () => {
-  const [activeNav, setActiveNav] = useState("My Tasks");
+  const [activeNav, setActiveNav] = useState("Home");
 
   return (
     <ScenarioProvider>
