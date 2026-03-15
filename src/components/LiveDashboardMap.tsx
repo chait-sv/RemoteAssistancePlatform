@@ -84,9 +84,9 @@ function selectVehicles(tasks: Task[]): { task: Task; band: "green" | "amber" | 
   const red = tasks.filter((t) => getBand(t.elapsed) === "red");
 
   const pickN = (arr: Task[], n: number) => arr.slice(0, n);
-  const gCount = Math.min(Math.floor(green.length * 0.25), 25);
-  const aCount = Math.min(Math.floor(amber.length * 0.25), 25);
-  const rCount = Math.min(Math.floor(red.length * 0.25), 25);
+  const gCount = Math.floor(green.length * 0.5);
+  const aCount = Math.floor(amber.length * 0.5);
+  const rCount = Math.floor(red.length * 0.5);
 
   return [
     ...pickN(green, gCount).map((t) => ({ task: t, band: "green" as const })),
