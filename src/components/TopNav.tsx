@@ -13,7 +13,7 @@ const TopNav = () => {
   const [city, setCity] = useState("san-francisco");
 
   return (
-    <nav className="h-12 border-b border-border bg-card flex items-center justify-between px-4">
+    <nav className="h-12 border-b border-border bg-card flex items-center justify-between px-4 relative z-[1000]">
       <div className="flex items-center gap-3">
         <ShieldCheck className="h-5 w-5 text-primary" />
         <span className="font-sans font-bold text-sm tracking-widest uppercase text-foreground">
