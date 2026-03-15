@@ -82,7 +82,13 @@ function generateTasks() {
     const faultType = typePool[i];
     const createdOffset = Math.floor(rand() * 86400) * 1000; // within last 24h
     const created = new Date(now - createdOffset);
-    const elapsed = Math.floor(rand() * 301); // 0–300 seconds
+    const elapsedRoll = rand();
+    // 60% green (0-39), 20% amber (40-59), 20% red (61-300)
+    const elapsed = elapsedRoll < 0.6
+      ? Math.floor(rand() * 40)
+      : elapsedRoll < 0.8
+        ? 40 + Math.floor(rand() * 20)
+        : 61 + Math.floor(rand() * 240);
     return {
       id: `INT-${5000 + i}`,
       description: pick(descriptions[faultType]),
