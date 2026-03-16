@@ -9,6 +9,7 @@ import constructionFront from "@/assets/construction-front.jpg";
 import constructionLeft from "@/assets/construction-left.jpg";
 import constructionRight from "@/assets/construction-right.jpg";
 import constructionMap from "@/assets/construction-map.png";
+import marathonMap from "@/assets/marathon-map.png";
 
 const scenarioCamera = {
   "INT-4821": {
@@ -29,15 +30,15 @@ const scenarioCamera = {
     left: camLeft,
     front: camFront,
     right: camRight,
-    overlay: "Sensor calibration in progress",
+    overlay: "Live Feed: Physical marathon barricades blocking intersection ahead",
     routeActive: false,
   },
 };
 
 const scenarioMap = {
-  "INT-4821": { img: hdMapImg, label: "Semantic", coords: "LAT 37.7749 | LNG -122.4194", showPathBlocked: false },
-  "INT-4822": { img: constructionMap, label: "Construction", coords: "LAT 37.7812 | LNG -122.4098", showPathBlocked: true },
-  "INT-4823": { img: hdMapImg, label: "Semantic", coords: "LAT 37.7749 | LNG -122.4194", showPathBlocked: false },
+  "INT-4821": { img: hdMapImg, label: "Semantic", coords: "LAT 37.7749 | LNG -122.4194", showPathBlocked: false, showMarathonRoutes: false },
+  "INT-4822": { img: constructionMap, label: "Construction", coords: "LAT 37.7812 | LNG -122.4098", showPathBlocked: true, showMarathonRoutes: false },
+  "INT-4823": { img: marathonMap, label: "Marathon Reroute", coords: "LAT 37.7835 | LNG -122.4089", showPathBlocked: false, showMarathonRoutes: true },
 };
 
 const ContextView = () => {
@@ -140,6 +141,18 @@ const ContextView = () => {
                 <AlertOctagon className="h-6 w-6 text-destructive-foreground" />
               </div>
               <span className="text-[11px] font-mono font-bold text-destructive bg-background/80 backdrop-blur-sm px-2 py-0.5 rounded-sm">PATH BLOCKED</span>
+            </div>
+          )}
+          {map.showMarathonRoutes && (
+            <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+              <div className="flex items-center gap-1.5 bg-background/80 backdrop-blur-sm px-2 py-1 rounded-sm">
+                <div className="w-5 h-0.5 border-t-2 border-dashed border-blue-400" />
+                <span className="text-[10px] font-mono font-semibold text-blue-400">Route A: U-Turn + Detour</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-background/80 backdrop-blur-sm px-2 py-1 rounded-sm">
+                <div className="w-5 h-0.5 border-t-2 border-dashed border-green-400" />
+                <span className="text-[10px] font-mono font-semibold text-green-400">Route B: Left Turn + Alt Street</span>
+              </div>
             </div>
           )}
           <div className="absolute bottom-2 left-2 flex items-center gap-4 bg-background/80 backdrop-blur-sm px-2.5 py-1 rounded-sm">

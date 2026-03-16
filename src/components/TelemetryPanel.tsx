@@ -67,13 +67,13 @@ const scenarioTelemetry = {
     { label: "Fault Description", value: "Conflicting signage detected", icon: AlertCircle, color: "text-warning" },
   ],
   "INT-4823": [
-    { label: "Vehicle ID", value: "NRU-0089", icon: null },
-    { label: "Battery", value: "94%", icon: Battery, color: "text-accent" },
-    { label: "Disk Storage", value: "31%", icon: HardDrive, color: "text-accent" },
-    { label: "Speed", value: "15 mph", icon: Gauge, color: "text-primary" },
-    { label: "Fault Code", value: "E-SENSOR-CAL", icon: AlertCircle, color: "text-warning" },
-    { label: "Fault Type", value: "Hardware", icon: AlertCircle, color: "text-warning" },
-    { label: "Fault Description", value: "Lidar calibration drift detected", icon: AlertCircle, color: "text-warning" },
+    { label: "Vehicle ID", value: "NL-8451", icon: null },
+    { label: "Battery", value: "64%", icon: Battery, color: "text-accent" },
+    { label: "Disk Storage", value: "88%", icon: HardDrive, color: "text-accent" },
+    { label: "Speed", value: "0 mph", icon: Gauge, color: "text-primary" },
+    { label: "Fault Code", value: "E-ROUTE-BLOCK", icon: AlertCircle, color: "text-warning" },
+    { label: "Fault Type", value: "Fleet CX", icon: AlertCircle, color: "text-warning" },
+    { label: "Fault Description", value: "Route obstructed by barriers", icon: AlertCircle, color: "text-warning" },
   ],
 };
 
@@ -88,7 +88,8 @@ const scenarioChat = {
     { sender: "rider", text: "Will you go around this construction?", time: "14:46" },
   ],
   "INT-4823": [
-    { sender: "system", text: "Vehicle performing sensor calibration. No rider action required.", time: "15:01" },
+    { sender: "system", text: "We are calculating a new route around local event closures. Adding 4 mins to ETA.", time: "15:01" },
+    { sender: "rider", text: "Thank you for keeping me informed and safe.", time: "15:02" },
   ],
 };
 
@@ -106,9 +107,9 @@ const scenarioAutonomy = {
     specialButton: null,
   },
   "INT-4823": {
-    action: "Action: Approve recalibration sequence.",
+    action: "Action: Approve reroute around marathon closure.",
     actionColor: "text-accent",
-    warning: null,
+    warning: "Route blocked by marathon barricades — vehicle stopped",
     specialButton: null,
   },
 };

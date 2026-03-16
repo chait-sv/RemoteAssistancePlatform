@@ -26,7 +26,7 @@ const steps = [
   { label: "Resolve", icon: CheckCircle2 },
 ];
 
-const scenarioRadioOptions: Record<string, { label: string; value: string }[]> = {
+const scenarioRadioOptions: Record<string, { label: string; value: string; color?: string }[]> = {
   "INT-4821": [
     { label: "Waypoint 1", value: "waypoint-1" },
     { label: "Waypoint 2", value: "waypoint-2" },
@@ -34,6 +34,10 @@ const scenarioRadioOptions: Record<string, { label: string; value: string }[]> =
   "INT-4822": [
     { label: "Approve", value: "approve" },
     { label: "Reject", value: "reject" },
+  ],
+  "INT-4823": [
+    { label: "Approve Proposed Route A (U-Turn + Detour)", value: "route-a", color: "text-blue-400" },
+    { label: "Approve Proposed Route B (Left Turn + Alt Street)", value: "route-b", color: "text-green-400" },
   ],
 };
 
@@ -137,10 +141,10 @@ const GuidedWorkflow = ({ autonomy, onResolve }: GuidedWorkflowProps) => {
               )}
               {radioOptions && (
                 <RadioGroup value={radioSelection} onValueChange={setRadioSelection} className="space-y-1.5">
-                  {radioOptions.map((opt) => (
+                 {radioOptions.map((opt) => (
                     <div key={opt.value} className="flex items-center gap-2">
                       <RadioGroupItem value={opt.value} id={opt.value} />
-                      <Label htmlFor={opt.value} className="text-[11px] text-foreground cursor-pointer">{opt.label}</Label>
+                      <Label htmlFor={opt.value} className={`text-[11px] cursor-pointer ${opt.color || "text-foreground"}`}>{opt.label}</Label>
                     </div>
                   ))}
                 </RadioGroup>

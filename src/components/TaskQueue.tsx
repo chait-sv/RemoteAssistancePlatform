@@ -21,8 +21,8 @@ const tickets: { id: ScenarioId; priority: string; label: string; vehicle: strin
   {
     id: "INT-4823",
     priority: "medium",
-    label: "Sensor Calibration",
-    vehicle: "NRU-0089",
+    label: "P3 - Macro-Route Blockage",
+    vehicle: "NL-8451",
     time: "02:33",
     icon: Zap,
   },
