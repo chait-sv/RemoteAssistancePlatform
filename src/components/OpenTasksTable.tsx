@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
-import { allTasks, getBand, wrapInBand, colorBands, type Task } from "@/data/taskData";
+import { allTasksWithClosed, getBand, wrapInBand, colorBands, type Task } from "@/data/taskData";
 
 type SortDir = "asc" | "desc" | null;
 
