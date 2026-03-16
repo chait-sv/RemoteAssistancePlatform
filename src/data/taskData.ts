@@ -112,12 +112,14 @@ export function generateTasks(): Task[] {
       : elapsedRoll < 0.8
         ? 40 + Math.floor(rand() * 20)
         : 61 + Math.floor(rand() * 240);
+    const fc = pick(faultCodes[faultType]);
     return {
       id: `INT-${5000 + i}`,
       description: pick(descriptions[faultType]),
       priority: pick(priorities),
       vehicleId: `NL-${String(Math.floor(rand() * 200)).padStart(4, "0")}`,
-      faultCode: pick(faultCodes[faultType]),
+      faultCode: fc,
+      faultDescription: faultCodeDescriptions[fc] ?? "",
       faultType,
       created,
       elapsed,
