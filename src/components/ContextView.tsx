@@ -133,7 +133,7 @@ const ContextView = () => {
           <span className="text-[10px] font-mono text-muted-foreground">{map.coords}</span>
         </div>
         <div className="flex-1 relative overflow-hidden min-h-0">
-          <img src={map.img} alt="HD Semantic Map" className={`absolute inset-0 w-full h-full object-cover ${map.showMarathonRoutes ? "object-[center_30%]" : ""}`} />
+          <img src={map.img} alt="HD Semantic Map" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-background/10" />
           {map.showPathBlocked && (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1">
