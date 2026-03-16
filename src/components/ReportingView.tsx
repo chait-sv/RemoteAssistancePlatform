@@ -176,9 +176,10 @@ const FaultMetricsTable = () => {
           </TableHeader>
           <TableBody>
             {sorted.map((row, i) => (
-              <TableRow key={`${row.faultCode}-${i}`} className="text-xs">
+              <TableRow key={`${row.faultCode}-${row.vehicleId}-${i}`} className="text-xs">
                 <TableCell className="px-3 py-1.5 font-mono">{row.faultCode}</TableCell>
                 <TableCell className="px-3 py-1.5 max-w-[200px] truncate">{row.faultDescription}</TableCell>
+                <TableCell className="px-3 py-1.5 font-mono">{row.vehicleId}</TableCell>
                 <TableCell className="px-3 py-1.5 font-mono text-right font-semibold">{row.occurrences}</TableCell>
               </TableRow>
             ))}
