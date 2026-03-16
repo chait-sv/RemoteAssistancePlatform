@@ -10,8 +10,10 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 // Obfuscated credentials (base64-encoded, decoded at runtime)
-const OBF_U = "Y2hhaXRzdg==";
-const OBF_P = "dGVtcDEyMw==";
+const VALID_CREDS = [
+  { u: "Y2hhaXRzdg==", p: "dGVtcDEyMw==" },
+  { u: "bnVybw==", p: "ZmxlZXQ=" },
+];
 
 function decode(encoded: string): string {
   return atob(encoded);
