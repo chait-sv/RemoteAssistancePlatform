@@ -66,6 +66,7 @@ export interface Task {
   priority: string;
   vehicleId: string;
   faultCode: string;
+  faultDescription: string;
   faultType: string;
   created: Date;
   elapsed: number;
