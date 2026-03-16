@@ -25,7 +25,7 @@ const TopNav = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <div className="flex items-center gap-2 text-xs text-foreground">
           <Radio className="h-3 w-3 text-accent status-pulse" />
           <span>CONNECTED</span>
         </div>
