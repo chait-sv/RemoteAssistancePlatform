@@ -1,8 +1,9 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState, useCallback } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { allTasks, getBand, type Task } from "@/data/taskData";
 import vehicleImg from "@/assets/vehicle-marker.png";
+import VehicleInfoPanel from "@/components/VehicleInfoPanel";
 
 // San Francisco street coordinates for seeding vehicles – real streets, no overlaps
 const sfStreetPositions: [number, number][] = [
@@ -47,7 +48,7 @@ function createVehicleIcon(vehicleId: string, band: "green" | "amber" | "red") {
   return L.divIcon({
     className: "vehicle-marker",
     html: `
-      <div style="display:flex;flex-direction:column;align-items:center;pointer-events:auto;">
+      <div style="display:flex;flex-direction:column;align-items:center;pointer-events:auto;cursor:pointer;">
         <div style="
           background:${color};
           color:#000;
@@ -88,7 +89,6 @@ function selectVehicles(tasks: Task[]): { task: Task; band: "green" | "amber" | 
   const aArr = pickN(amber, aCount).map((t) => ({ task: t, band: "amber" as const }));
   const rArr = pickN(red, rCount).map((t) => ({ task: t, band: "red" as const }));
 
-  // Interleave bands so colors are evenly distributed across map positions
   const result: { task: Task; band: "green" | "amber" | "red" }[] = [];
   const maxLen = Math.max(gArr.length, aArr.length, rArr.length);
   for (let i = 0; i < maxLen; i++) {
@@ -102,8 +102,34 @@ function selectVehicles(tasks: Task[]): { task: Task; band: "green" | "amber" | 
 const LiveDashboardMap = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const hoveringPanel = useRef(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const vehicles = useMemo(() => selectVehicles(allTasks), []);
+
+  const handleMarkerClick = useCallback((task: Task) => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setSelectedTask(task);
+  }, []);
+
+  const handlePanelMouseEnter = useCallback(() => {
+    hoveringPanel.current = true;
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }, []);
+
+  const handlePanelMouseLeave = useCallback(() => {
+    hoveringPanel.current = false;
+    closeTimer.current = setTimeout(() => {
+      setSelectedTask(null);
+    }, 200);
+  }, []);
 
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return;
@@ -115,24 +141,20 @@ const LiveDashboardMap = () => {
       attributionControl: false,
     });
 
-    // Light tile layer
     L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
       maxZoom: 19,
     }).addTo(map);
 
-    // Zoom control bottom-right
     L.control.zoom({ position: "bottomright" }).addTo(map);
-
-    // Attribution bottom-left
     L.control.attribution({ position: "bottomleft" }).addTo(map).addAttribution(
       '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
     );
 
-    // Plot vehicles
     vehicles.forEach(({ task, band }, i) => {
       const pos = sfStreetPositions[i % sfStreetPositions.length];
       const icon = createVehicleIcon(task.vehicleId, band);
-      L.marker(pos, { icon }).addTo(map);
+      const marker = L.marker(pos, { icon }).addTo(map);
+      marker.on("click", () => handleMarkerClick(task));
     });
 
     mapInstance.current = map;
@@ -141,7 +163,7 @@ const LiveDashboardMap = () => {
       map.remove();
       mapInstance.current = null;
     };
-  }, [vehicles]);
+  }, [vehicles, handleMarkerClick]);
 
   return (
     <div className="h-full panel-border flex flex-col">
@@ -159,7 +181,16 @@ const LiveDashboardMap = () => {
           </span>
         </div>
       </div>
-      <div ref={mapRef} className="flex-1" />
+      <div className="flex-1 relative">
+        <div ref={mapRef} className="absolute inset-0" />
+        {selectedTask && (
+          <VehicleInfoPanel
+            task={selectedTask}
+            onMouseEnter={handlePanelMouseEnter}
+            onMouseLeave={handlePanelMouseLeave}
+          />
+        )}
+      </div>
     </div>
   );
 };
