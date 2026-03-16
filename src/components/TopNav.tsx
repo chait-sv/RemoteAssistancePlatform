@@ -17,10 +17,10 @@ const TopNav = () => {
       <div className="flex items-center gap-3">
         <ShieldCheck className="h-5 w-5 text-primary" />
         <span className="font-sans font-bold text-sm tracking-widest uppercase text-foreground">
-          FIP
+          RAP
         </span>
         <span className="text-sm font-semibold text-foreground hidden sm:inline tracking-wide">
-          Fleet Intelligence Platform
+          Remote Assistance Platform
         </span>
       </div>
 
