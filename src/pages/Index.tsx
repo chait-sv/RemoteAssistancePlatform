@@ -5,6 +5,7 @@ import ContextView from "@/components/ContextView";
 import TelemetryPanel from "@/components/TelemetryPanel";
 import OpenTasksTable from "@/components/OpenTasksTable";
 import LiveDashboardMap from "@/components/LiveDashboardMap";
+import ReportingView from "@/components/ReportingView";
 import { ScenarioProvider } from "@/contexts/ScenarioContext";
 
 const Index = () => {
@@ -24,6 +25,8 @@ const Index = () => {
             ) : (
               activeNav === "Home" ? (
                 <LiveDashboardMap />
+              ) : activeNav === "Reporting" ? (
+                <ReportingView />
               ) : (
                 <div className="h-full panel-border">
                   <div className="panel-header">{activeNav}</div>
