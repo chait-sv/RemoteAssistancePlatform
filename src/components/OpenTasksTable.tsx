@@ -97,7 +97,7 @@ const OpenTasksTable = () => {
   return (
     <div className="flex flex-col h-full panel-border">
       <div className="panel-header flex items-center justify-between">
-        <span>Open Tasks</span>
+        <span>Tasks</span>
         <Input
           placeholder="Filter tasks…"
           value={filter}

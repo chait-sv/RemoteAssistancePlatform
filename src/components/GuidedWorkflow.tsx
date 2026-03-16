@@ -77,7 +77,7 @@ const GuidedWorkflow = ({ autonomy, onResolve, onNavigate }: GuidedWorkflowProps
     const isLastTicket = currentIndex === ticketOrder.length - 1;
     setTimeout(() => {
       if (isLastTicket) {
-        onNavigate("Open Tasks");
+        onNavigate("Tasks");
       } else {
         const nextTicket = ticketOrder[currentIndex + 1];
         setActiveTicket(nextTicket);

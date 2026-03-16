@@ -9,7 +9,7 @@ import TaskQueue from "@/components/TaskQueue";
 const navItems = [
   { icon: Home, label: "Home" },
   { icon: User, label: "My Tasks" },
-  { icon: FolderOpen, label: "Open Tasks" },
+  { icon: FolderOpen, label: "Tasks" },
   { icon: BarChart3, label: "Reporting" },
 ];
 

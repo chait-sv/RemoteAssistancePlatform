@@ -19,7 +19,7 @@ const Index = () => {
           <div className="flex-1 min-w-0">
             {activeNav === "My Tasks" ? (
               <ContextView />
-            ) : activeNav === "Open Tasks" ? (
+            ) : activeNav === "Tasks" ? (
               <OpenTasksTable />
             ) : (
               activeNav === "Home" ? (
