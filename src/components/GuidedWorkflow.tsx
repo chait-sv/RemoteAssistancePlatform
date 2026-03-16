@@ -110,7 +110,7 @@ const GuidedWorkflow = ({ autonomy, onResolve }: GuidedWorkflowProps) => {
                 </div>
               )}
               {autonomy.specialButton && (
-                <Button variant="destructive" size="sm" className="w-full text-[10px] bg-orange-600 hover:bg-orange-700 border-orange-500">
+                <Button variant="destructive" size="sm" className="w-full text-[10px]">
                   {autonomy.specialButton}
                 </Button>
               )}
