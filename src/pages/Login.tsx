@@ -40,7 +40,7 @@ const Login = () => {
           <ShieldCheck className="h-10 w-10 text-primary mx-auto" />
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-foreground font-mono leading-tight">
-              Fleet Intelligence
+              Remote Assistance
             </h1>
             <h1 className="text-2xl font-bold tracking-tight text-foreground font-mono leading-tight">
               Platform
