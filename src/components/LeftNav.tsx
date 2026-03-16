@@ -73,11 +73,9 @@ const LeftNav = ({ activeNav, setActiveNav }: LeftNavProps) => {
                 <LogOut className="h-4 w-4" />
               </button>
             </TooltipTrigger>
-            {!expanded && (
-              <TooltipContent side="right" className="text-xs">
-                Logout
-              </TooltipContent>
-            )}
+            <TooltipContent side="right" className="text-xs z-[3000]">
+              Logout
+            </TooltipContent>
           </Tooltip>
         </div>
       </div>
