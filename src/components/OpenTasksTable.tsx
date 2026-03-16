@@ -12,7 +12,6 @@ type SortDir = "asc" | "desc" | null;
 
 const columnDefs: { key: keyof Task; label: string }[] = [
   { key: "id", label: "Task ID" },
-  { key: "description", label: "Task Description" },
   { key: "priority", label: "Priority" },
   { key: "vehicleId", label: "Vehicle ID" },
   { key: "faultCode", label: "Fault Code" },
