@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
 import { useScenario } from "@/contexts/ScenarioContext";
+import GuidedWorkflow from "@/components/GuidedWorkflow";
 
 type HealthStatus = "green" | "amber" | "red";
 
