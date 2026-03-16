@@ -138,7 +138,7 @@ const TelemetryPanel = () => {
       {/* Telemetry */}
       <Collapsible defaultOpen className="panel-border">
         <CollapsibleTrigger className="panel-header w-full flex items-center justify-between cursor-pointer group">
-          <span>Telemetry</span>
+          <span>Vehicle Telemetry</span>
           <ChevronDown className="h-3 w-3 text-muted-foreground transition-transform group-data-[state=closed]:-rotate-90" />
         </CollapsibleTrigger>
         <CollapsibleContent>
