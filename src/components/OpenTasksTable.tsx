@@ -12,11 +12,11 @@ type SortDir = "asc" | "desc" | null;
 
 const columnDefs: { key: keyof Task; label: string }[] = [
   { key: "id", label: "Task ID" },
+  { key: "description", label: "Task Description" },
   { key: "priority", label: "Priority" },
   { key: "vehicleId", label: "Vehicle ID" },
   { key: "faultCode", label: "Fault Code" },
   { key: "faultType", label: "Fault Type" },
-  { key: "description", label: "Fault Description" },
   { key: "created", label: "Created" },
   { key: "elapsed", label: "Elapsed (s)" },
   { key: "operator", label: "Remote Operator" },
@@ -127,6 +127,7 @@ const OpenTasksTable = () => {
             {sorted.map((task) => (
               <TableRow key={task.id} className="text-xs">
                 <TableCell className="px-3 py-1.5 font-semibold text-foreground">{task.id}</TableCell>
+                <TableCell className="px-3 py-1.5 max-w-[200px] truncate">{task.description}</TableCell>
                 <TableCell className="px-3 py-1.5">
                   <Badge variant="outline" className={`text-[11px] px-1.5 py-0 ${priorityColors[task.priority]}`}>
                     {task.priority}
@@ -135,7 +136,6 @@ const OpenTasksTable = () => {
                 <TableCell className="px-3 py-1.5 font-mono">{task.vehicleId}</TableCell>
                 <TableCell className="px-3 py-1.5 font-mono">{task.faultCode}</TableCell>
                 <TableCell className="px-3 py-1.5">{task.faultType}</TableCell>
-                <TableCell className="px-3 py-1.5 max-w-[200px] truncate">{task.description}</TableCell>
                 <TableCell className="px-3 py-1.5 whitespace-nowrap">
                   {task.created.toLocaleString("en-US", { month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })}
                 </TableCell>
