@@ -62,9 +62,9 @@ const OpenTasksTable = () => {
   };
 
   const filtered = useMemo(() => {
-    if (!filter) return allTasks;
+    if (!filter) return allTasksWithClosed;
     const q = filter.toLowerCase();
-    return allTasks.filter((t) =>
+    return allTasksWithClosed.filter((t) =>
       Object.values(t).some((v) =>
         String(v instanceof Date ? v.toLocaleString() : v).toLowerCase().includes(q)
       )
