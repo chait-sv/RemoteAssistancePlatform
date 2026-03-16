@@ -33,7 +33,7 @@ const Index = () => {
           </div>
           {activeNav === "My Tasks" && (
             <div className="w-[25%] min-w-0 overflow-y-auto">
-              <TelemetryPanel />
+              <TelemetryPanel onResolve={() => setActiveNav("My Tasks")} />
             </div>
           )}
         </div>
