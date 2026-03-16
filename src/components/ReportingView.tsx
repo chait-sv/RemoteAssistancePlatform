@@ -73,27 +73,34 @@ interface FaultMetric {
   faultCode: string;
   faultDescription: string;
   occurrences: number;
+  vehicleId: string;
 }
 
 type MetricSortKey = keyof FaultMetric;
 type SortDir = "asc" | "desc" | null;
 
 const faultMetrics: FaultMetric[] = (() => {
-  const map = new Map<string, { count: number; description: string }>();
+  const map = new Map<string, { count: number; vehicles: Set<string>; description: string }>();
   closedTasks.forEach((t) => {
-    const entry = map.get(t.faultCode) || { count: 0, description: t.faultDescription };
+    const entry = map.get(t.faultCode) || { count: 0, vehicles: new Set<string>(), description: t.description };
     entry.count += 1;
+    entry.vehicles.add(t.vehicleId);
     map.set(t.faultCode, entry);
   });
-  return Array.from(map.entries())
-    .map(([code, { count, description }]) => ({ faultCode: code, faultDescription: description, occurrences: count }))
-    .sort((a, b) => b.occurrences - a.occurrences);
+  const rows: FaultMetric[] = [];
+  map.forEach((val, code) => {
+    val.vehicles.forEach((vid) => {
+      rows.push({ faultCode: code, faultDescription: val.description, occurrences: val.count, vehicleId: vid });
+    });
+  });
+  return rows;
 })();
 
 const metricCols: { key: MetricSortKey; label: string }[] = [
   { key: "faultCode", label: "Fault Code" },
   { key: "faultDescription", label: "Fault Description" },
   { key: "occurrences", label: "Occurrences" },
+  { key: "vehicleId", label: "Vehicle ID" },
 ];
 
 const FaultMetricsTable = () => {
@@ -170,10 +177,11 @@ const FaultMetricsTable = () => {
           </TableHeader>
           <TableBody>
             {sorted.map((row, i) => (
-              <TableRow key={`${row.faultCode}-${i}`} className="text-xs">
+              <TableRow key={`${row.faultCode}-${row.vehicleId}-${i}`} className="text-xs">
                 <TableCell className="px-3 py-1.5 font-mono">{row.faultCode}</TableCell>
                 <TableCell className="px-3 py-1.5 max-w-[200px] truncate">{row.faultDescription}</TableCell>
                 <TableCell className="px-3 py-1.5 font-mono text-right font-semibold">{row.occurrences}</TableCell>
+                <TableCell className="px-3 py-1.5 font-mono">{row.vehicleId}</TableCell>
               </TableRow>
             ))}
           </TableBody>
