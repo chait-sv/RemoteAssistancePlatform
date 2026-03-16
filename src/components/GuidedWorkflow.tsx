@@ -26,15 +26,31 @@ const steps = [
   { label: "Resolve", icon: CheckCircle2 },
 ];
 
+const scenarioRadioOptions: Record<string, { label: string; value: string }[]> = {
+  "INT-4821": [
+    { label: "Waypoint 1", value: "waypoint-1" },
+    { label: "Waypoint 2", value: "waypoint-2" },
+  ],
+  "INT-4822": [
+    { label: "Approve", value: "approve" },
+    { label: "Reject", value: "reject" },
+  ],
+};
+
 const GuidedWorkflow = ({ autonomy, onResolve }: GuidedWorkflowProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [resolveOpen, setResolveOpen] = useState(false);
   const [faultCategory, setFaultCategory] = useState("");
   const [flagSimReview, setFlagSimReview] = useState(false);
+  const [radioSelection, setRadioSelection] = useState("");
+  const { activeTicket } = useScenario();
+
+  const radioOptions = scenarioRadioOptions[activeTicket];
 
   const handleStepAction = () => {
     if (currentStep < 3) {
       setCurrentStep((s) => s + 1);
+      if (currentStep === 1) setRadioSelection("");
     } else {
       setResolveOpen(true);
     }
@@ -45,6 +61,7 @@ const GuidedWorkflow = ({ autonomy, onResolve }: GuidedWorkflowProps) => {
     setCurrentStep(0);
     setFaultCategory("");
     setFlagSimReview(false);
+    setRadioSelection("");
     toast({
       title: "Edge case tagged and submitted successfully",
       className: "bg-accent text-accent-foreground border-accent",
