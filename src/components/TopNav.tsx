@@ -31,7 +31,7 @@ const TopNav = () => {
         </div>
 
         <div className="flex items-center gap-1 text-xs">
-          <MapPin className="h-3 w-3 text-muted-foreground" />
+          <MapPin className="h-3 w-3 text-primary" />
           <Select value={city} onValueChange={setCity}>
             <SelectTrigger className="h-7 w-[140px] border-border bg-card text-xs text-foreground">
               <SelectValue />
@@ -49,7 +49,7 @@ const TopNav = () => {
         </div>
 
         <div className="flex items-center gap-1 text-xs">
-          <span className="text-muted-foreground">Tenant:</span>
+          <span className="text-primary">Tenant:</span>
           <Select value={tenant} onValueChange={setTenant}>
             <SelectTrigger className="h-7 w-[200px] border-border bg-card text-xs text-foreground">
               <SelectValue />
