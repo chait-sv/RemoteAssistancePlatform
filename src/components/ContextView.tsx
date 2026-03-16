@@ -9,6 +9,7 @@ import constructionFront from "@/assets/construction-front.jpg";
 import constructionLeft from "@/assets/construction-left.jpg";
 import constructionRight from "@/assets/construction-right.jpg";
 import constructionMap from "@/assets/construction-map.png";
+import marathonMap from "@/assets/marathon-map.png";
 
 const scenarioCamera = {
   "INT-4821": {
