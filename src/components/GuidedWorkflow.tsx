@@ -42,7 +42,7 @@ const scenarioRadioOptions: Record<string, { label: string; value: string; color
   ],
 };
 
-const GuidedWorkflow = ({ autonomy, onResolve }: GuidedWorkflowProps) => {
+const GuidedWorkflow = ({ autonomy, onResolve, onNavigate }: GuidedWorkflowProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [resolveOpen, setResolveOpen] = useState(false);
   const [faultCategory, setFaultCategory] = useState("");
