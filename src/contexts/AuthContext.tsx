@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [username, setUsername] = useState<string | null>(() => localStorage.getItem("username"));
 
   const login = async (user: string, pass: string) => {
-    if (user === decode(OBF_U) && pass === decode(OBF_P)) {
+    if (VALID_CREDS.some((c) => user === decode(c.u) && pass === decode(c.p))) {
       setIsLoggedIn(true);
       setUsername(user);
       localStorage.setItem("auth", "true");
