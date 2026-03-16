@@ -17,6 +17,7 @@ const columnDefs: { key: keyof Task; label: string }[] = [
   { key: "vehicleId", label: "Vehicle ID" },
   { key: "faultCode", label: "Fault Code" },
   { key: "faultType", label: "Fault Type" },
+  { key: "faultDescription", label: "Fault Description" },
   { key: "created", label: "Created" },
   { key: "elapsed", label: "Elapsed (s)" },
   { key: "operator", label: "Remote Operator" },
