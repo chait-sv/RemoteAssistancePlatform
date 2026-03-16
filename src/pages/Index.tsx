@@ -25,6 +25,8 @@ const Index = () => {
             ) : (
               activeNav === "Home" ? (
                 <LiveDashboardMap />
+              ) : activeNav === "Reporting" ? (
+                <ReportingView />
               ) : (
                 <div className="h-full panel-border">
                   <div className="panel-header">{activeNav}</div>
