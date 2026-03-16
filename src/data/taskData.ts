@@ -1,7 +1,7 @@
 // Shared task generation logic used by OpenTasksTable and LiveDashboardMap
 
 export const faultTypes = ["Fleet CX", "AV Platform", "Vehicle Platform", "Hardware"];
-export const statuses = ["Not Started", "In progress", "Rescue"];
+export const statuses = ["Not Started", "In progress", "Rescue", "Closed"];
 export const operators = [
   "J. Martinez", "A. Chen", "R. Patel", "K. Okonkwo", "L. Johansson",
   "M. Tanaka", "S. Williams", "D. Kim", "P. Novak", "T. Adeyemi",
@@ -105,7 +105,52 @@ export function generateTasks(): Task[] {
   });
 }
 
+export function generateClosedTasks(): Task[] {
+  const rand = seededRandom(999);
+  const pick = <T,>(arr: T[]) => arr[Math.floor(rand() * arr.length)];
+
+  const typePool: string[] = [
+    ...Array(120).fill("Fleet CX"),
+    ...Array(40).fill("AV Platform"),
+    ...Array(20).fill("Vehicle Platform"),
+    ...Array(20).fill("Hardware"),
+  ];
+  for (let i = typePool.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [typePool[i], typePool[j]] = [typePool[j], typePool[i]];
+  }
+
+  const priorities = ["P1", "P2", "P3"];
+  const now = Date.now();
+
+  return Array.from({ length: 200 }, (_, i) => {
+    const faultType = typePool[i];
+    const createdOffset = (86400 + Math.floor(rand() * 604800)) * 1000;
+    const created = new Date(now - createdOffset);
+    const elapsedRoll = rand();
+    const elapsed = elapsedRoll < 0.6
+      ? Math.floor(rand() * 40)
+      : elapsedRoll < 0.8
+        ? 40 + Math.floor(rand() * 20)
+        : 61 + Math.floor(rand() * 240);
+    return {
+      id: `INT-${6000 + i}`,
+      description: pick(descriptions[faultType]),
+      priority: pick(priorities),
+      vehicleId: `NL-${String(Math.floor(rand() * 200)).padStart(4, "0")}`,
+      faultCode: pick(faultCodes[faultType]),
+      faultType,
+      created,
+      elapsed,
+      operator: pick(operators),
+      status: "Closed",
+    };
+  });
+}
+
 export const allTasks = generateTasks();
+export const closedTasks = generateClosedTasks();
+export const allTasksWithClosed = [...allTasks, ...closedTasks];
 
 export function getBand(elapsed: number): "green" | "amber" | "red" {
   if (elapsed > 60) return "red";

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
-import { allTasks, getBand, wrapInBand, colorBands, type Task } from "@/data/taskData";
+import { allTasksWithClosed, getBand, wrapInBand, colorBands, type Task } from "@/data/taskData";
 
 type SortDir = "asc" | "desc" | null;
 
@@ -24,12 +24,13 @@ const columnDefs: { key: keyof Task; label: string }[] = [
 ];
 
 const priorityOrder: Record<string, number> = { P1: 0, P2: 1, P3: 2, P4: 3 };
-const statusOrder: Record<string, number> = { Rescue: 0, "In progress": 1, "Not Started": 2 };
+const statusOrder: Record<string, number> = { Rescue: 0, "In progress": 1, "Not Started": 2, Closed: 3 };
 
 const statusColors: Record<string, string> = {
   "In progress": "bg-primary/20 text-primary border-primary/30",
   "Not Started": "bg-muted text-muted-foreground border-border",
   Rescue: "bg-destructive/20 text-destructive border-destructive/30",
+  Closed: "bg-muted text-muted-foreground border-border opacity-60",
 };
 
 const priorityColors: Record<string, string> = {
@@ -61,9 +62,9 @@ const OpenTasksTable = () => {
   };
 
   const filtered = useMemo(() => {
-    if (!filter) return allTasks;
+    if (!filter) return allTasksWithClosed;
     const q = filter.toLowerCase();
-    return allTasks.filter((t) =>
+    return allTasksWithClosed.filter((t) =>
       Object.values(t).some((v) =>
         String(v instanceof Date ? v.toLocaleString() : v).toLowerCase().includes(q)
       )
@@ -138,7 +139,7 @@ const OpenTasksTable = () => {
                 <TableCell className="px-3 py-1.5 whitespace-nowrap">
                   {task.created.toLocaleString("en-US", { month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })}
                 </TableCell>
-                <TableCell className={`px-3 py-1.5 font-mono text-right font-semibold ${(() => { const band = getBand(task.elapsed); const live = wrapInBand(task.elapsed + tick, band); return live > 60 ? "text-destructive" : live >= 40 ? "text-warning" : "text-green-500"; })()}`}>{wrapInBand(task.elapsed + tick, getBand(task.elapsed))}</TableCell>
+                <TableCell className={`px-3 py-1.5 font-mono text-right font-semibold ${(() => { const isClosed = task.status === "Closed"; const band = getBand(task.elapsed); const live = isClosed ? task.elapsed : wrapInBand(task.elapsed + tick, band); return live > 60 ? "text-destructive" : live >= 40 ? "text-warning" : "text-green-500"; })()}`}>{task.status === "Closed" ? task.elapsed : wrapInBand(task.elapsed + tick, getBand(task.elapsed))}</TableCell>
                 <TableCell className="px-3 py-1.5">{task.operator}</TableCell>
                 <TableCell className="px-3 py-1.5">
                   <Badge variant="outline" className={`text-[11px] px-1.5 py-0 ${statusColors[task.status]}`}>
