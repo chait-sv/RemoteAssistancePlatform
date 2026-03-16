@@ -10,8 +10,10 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 // Obfuscated credentials (base64-encoded, decoded at runtime)
-const OBF_U = "Y2hhaXRzdg==";
-const OBF_P = "dGVtcDEyMw==";
+const VALID_CREDS = [
+  { u: "Y2hhaXRzdg==", p: "dGVtcDEyMw==" },
+  { u: "bnVybw==", p: "ZmxlZXQ=" },
+];
 
 function decode(encoded: string): string {
   return atob(encoded);
@@ -22,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [username, setUsername] = useState<string | null>(() => localStorage.getItem("username"));
 
   const login = async (user: string, pass: string) => {
-    if (user === decode(OBF_U) && pass === decode(OBF_P)) {
+    if (VALID_CREDS.some((c) => user === decode(c.u) && pass === decode(c.p))) {
       setIsLoggedIn(true);
       setUsername(user);
       localStorage.setItem("auth", "true");
