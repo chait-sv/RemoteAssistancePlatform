@@ -30,7 +30,7 @@ const scenarioCamera = {
     left: camLeft,
     front: camFront,
     right: camRight,
-    overlay: "Sensor calibration in progress",
+    overlay: "Live Feed: Physical marathon barricades blocking intersection ahead",
     routeActive: false,
   },
 };
