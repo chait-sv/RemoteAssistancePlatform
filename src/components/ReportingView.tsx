@@ -73,34 +73,27 @@ interface FaultMetric {
   faultCode: string;
   faultDescription: string;
   occurrences: number;
-  vehicleId: string;
 }
 
 type MetricSortKey = keyof FaultMetric;
 type SortDir = "asc" | "desc" | null;
 
 const faultMetrics: FaultMetric[] = (() => {
-  const map = new Map<string, { count: number; vehicles: Set<string>; description: string }>();
+  const map = new Map<string, { count: number; description: string }>();
   closedTasks.forEach((t) => {
-    const entry = map.get(t.faultCode) || { count: 0, vehicles: new Set<string>(), description: t.description };
+    const entry = map.get(t.faultCode) || { count: 0, description: t.faultDescription };
     entry.count += 1;
-    entry.vehicles.add(t.vehicleId);
     map.set(t.faultCode, entry);
   });
-  const rows: FaultMetric[] = [];
-  map.forEach((val, code) => {
-    val.vehicles.forEach((vid) => {
-      rows.push({ faultCode: code, faultDescription: val.description, occurrences: val.count, vehicleId: vid });
-    });
-  });
-  return rows;
+  return Array.from(map.entries())
+    .map(([code, { count, description }]) => ({ faultCode: code, faultDescription: description, occurrences: count }))
+    .sort((a, b) => b.occurrences - a.occurrences);
 })();
 
 const metricCols: { key: MetricSortKey; label: string }[] = [
   { key: "faultCode", label: "Fault Code" },
   { key: "faultDescription", label: "Fault Description" },
   { key: "occurrences", label: "Occurrences" },
-  { key: "vehicleId", label: "Vehicle ID" },
 ];
 
 const FaultMetricsTable = () => {
