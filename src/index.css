@@ -76,7 +76,7 @@
   }
 
   .panel-header {
-    @apply px-3 py-2 border-b border-border text-xs uppercase tracking-widest text-foreground font-semibold;
+    @apply px-3 py-2 border-b border-border text-xs uppercase tracking-widest text-primary font-semibold;
     font-family: 'Inter', sans-serif;
   }
 
