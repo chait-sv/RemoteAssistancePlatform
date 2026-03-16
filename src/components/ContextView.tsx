@@ -36,8 +36,8 @@ const scenarioCamera = {
 };
 
 const scenarioMap = {
-  "INT-4821": { img: hdMapImg, label: "Semantic", coords: "LAT 37.7749 | LNG -122.4194", showPathBlocked: false },
-  "INT-4822": { img: constructionMap, label: "Construction", coords: "LAT 37.7812 | LNG -122.4098", showPathBlocked: true },
+  "INT-4821": { img: hdMapImg, label: "Semantic", coords: "LAT 37.7749 | LNG -122.4194", showPathBlocked: false, showMarathonRoutes: false },
+  "INT-4822": { img: constructionMap, label: "Construction", coords: "LAT 37.7812 | LNG -122.4098", showPathBlocked: true, showMarathonRoutes: false },
   "INT-4823": { img: marathonMap, label: "Marathon Reroute", coords: "LAT 37.7835 | LNG -122.4089", showPathBlocked: false, showMarathonRoutes: true },
 };
 
