@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 
 const TopNav = () => {
-  const [tenant, setTenant] = useState("uber-fleet");
+  const [tenant, setTenant] = useState("nuro-lucid");
   const [city, setCity] = useState("san-francisco");
 
   return (
