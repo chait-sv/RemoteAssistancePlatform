@@ -12,7 +12,6 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 // Obfuscated credentials (base64-encoded, decoded at runtime)
 const VALID_CREDS = [
   { u: "Y2hhaXRzdg==", p: "dGVtcDEyMw==" },
-  { u: "bnVybw==", p: "ZmxlZXQ=" },
 ];
 
 function decode(encoded: string): string {
