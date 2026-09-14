@@ -141,13 +141,13 @@ const LiveDashboardMap = () => {
       attributionControl: false,
     });
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
     }).addTo(map);
 
     L.control.zoom({ position: "bottomright" }).addTo(map);
     L.control.attribution({ position: "bottomleft" }).addTo(map).addAttribution(
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     );
 
     vehicles.forEach(({ task, band }, i) => {
