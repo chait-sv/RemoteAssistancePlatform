@@ -147,7 +147,7 @@ const LiveDashboardMap = () => {
 
     L.control.zoom({ position: "bottomright" }).addTo(map);
     L.control.attribution({ position: "bottomleft" }).addTo(map).addAttribution(
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     );
 
     vehicles.forEach(({ task, band }, i) => {
